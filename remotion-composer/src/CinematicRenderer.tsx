@@ -1,5 +1,5 @@
 import React from "react";
-import { loadFont } from "@remotion/google-fonts/SpaceGrotesk";
+import { loadFont } from "@remotion/google-fonts/Inter";
 import {
   AbsoluteFill,
   Audio,

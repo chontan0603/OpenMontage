@@ -14,13 +14,24 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+TEMP_DIR = os.path.join(os.path.dirname(HERE), ".temp")
+os.makedirs(TEMP_DIR, exist_ok=True)
+os.environ["TEMP"] = TEMP_DIR
+os.environ["TMP"] = TEMP_DIR
+os.environ["REMOTION_TMPDIR"] = TEMP_DIR
 
-ROOT_DIR = Path(__file__).resolve().parent
+COMPOSITOR_DIR = os.path.join(os.path.dirname(HERE), "node_modules", "@remotion", "compositor-win32-x64-msvc")
+if os.path.isdir(COMPOSITOR_DIR):
+    os.environ["PATH"] = COMPOSITOR_DIR + os.pathsep + os.environ.get("PATH", "")
+
+ROOT_DIR = Path(HERE)
 COMPOSER_DIR = ROOT_DIR / "remotion-composer"
 PROPS_DIR = COMPOSER_DIR / "public" / "demo-props"
 OUTPUT_DIR = ROOT_DIR / "projects" / "demos" / "renders"
