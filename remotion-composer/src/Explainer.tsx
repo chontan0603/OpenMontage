@@ -271,7 +271,7 @@ interface Cut {
 }
 
 interface Overlay {
-  type: "section_title" | "stat_reveal" | "hero_title" | "provider_chip";
+  type: "section_title" | "stat_reveal" | "hero_title" | "provider_chip" | "comparison" | "callout" | "stat_card";
   in_seconds: number;
   out_seconds: number;
   text?: string;
@@ -282,6 +282,13 @@ interface Overlay {
   providers?: string[];
   cycleSeconds?: number;
   label?: string;
+  // comparison & callout
+  title?: string;
+  leftLabel?: string;
+  rightLabel?: string;
+  leftValue?: string;
+  rightValue?: string;
+  callout_type?: "tip" | "warning" | "info" | "insight";
 }
 
 interface AudioLayer {
@@ -825,6 +832,53 @@ const OverlayRenderer: React.FC<{ overlay: Overlay; theme: ThemeConfig }> = ({
         accentColor={overlay.accentColor}
         label={overlay.label}
       />
+    );
+  }
+  if (overlay.type === "comparison" && overlay.leftLabel && overlay.rightLabel) {
+    return (
+      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", pointerEvents: "none", zIndex: 30 }}>
+        <div style={{ maxWidth: 960, transform: "scale(0.88)" }}>
+          <ComparisonCard
+            title={overlay.title}
+            leftLabel={overlay.leftLabel}
+            rightLabel={overlay.rightLabel}
+            leftValue={overlay.leftValue || ""}
+            rightValue={overlay.rightValue || ""}
+            cardBackgroundColor="rgba(15, 26, 36, 0.90)"
+            textColor={theme.textColor}
+          />
+        </div>
+      </AbsoluteFill>
+    );
+  }
+  if (overlay.type === "callout" && overlay.text) {
+    return (
+      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", pointerEvents: "none", zIndex: 30 }}>
+        <div style={{ maxWidth: 840, transform: "scale(0.92)" }}>
+          <CalloutBox
+            text={overlay.text}
+            type={overlay.callout_type}
+            title={overlay.title}
+            borderColor={overlay.accentColor || theme.accentColor}
+            backgroundColor="rgba(15, 26, 36, 0.92)"
+            textColor={theme.textColor}
+          />
+        </div>
+      </AbsoluteFill>
+    );
+  }
+  if (overlay.type === "stat_card" && overlay.text) {
+    return (
+      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", pointerEvents: "none", zIndex: 30 }}>
+        <div style={{ maxWidth: 760, transform: "scale(0.9)" }}>
+          <StatCard
+            stat={overlay.text}
+            subtitle={overlay.subtitle}
+            accentColor={overlay.accentColor || theme.accentColor}
+            backgroundColor="rgba(15, 26, 36, 0.90)"
+          />
+        </div>
+      </AbsoluteFill>
     );
   }
   return null;

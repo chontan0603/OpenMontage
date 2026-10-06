@@ -1,0 +1,1189 @@
+{
+  "theme": "flat-motion-graphics",
+  "themeConfig": {
+    "primaryColor": "#38EF7D",
+    "accentColor": "#00E5FF",
+    "backgroundColor": "#050B10",
+    "surfaceColor": "#0F1A24",
+    "textColor": "#FFFFFF",
+    "mutedTextColor": "#94A3B8",
+    "headingFont": "Inter",
+    "bodyFont": "Inter",
+    "monoFont": "JetBrains Mono",
+    "chartColors": [
+      "#38EF7D",
+      "#00E5FF",
+      "#A78BFA",
+      "#F59E0B"
+    ],
+    "springConfig": {
+      "damping": 14,
+      "stiffness": 90,
+      "mass": 1
+    },
+    "transitionDuration": 0.4,
+    "captionHighlightColor": "#00E5FF",
+    "captionBackgroundColor": "rgba(5, 11, 16, 0.85)"
+  },
+  "cuts": [
+    {
+      "id": "om-cut-1",
+      "source": "wood_frog/scene1_frozen.jpg",
+      "type": "image",
+      "animation": "ken-burns",
+      "in_seconds": 0.0,
+      "out_seconds": 12.7
+    },
+    {
+      "id": "om-cut-2",
+      "source": "wood_frog/scene2_taiga.jpg",
+      "type": "image",
+      "animation": "pan-left",
+      "in_seconds": 12.7,
+      "out_seconds": 28.3
+    },
+    {
+      "id": "om-cut-3",
+      "source": "wood_frog/scene3_cell.jpg",
+      "type": "image",
+      "animation": "zoom-in",
+      "in_seconds": 28.3,
+      "out_seconds": 39.82
+    },
+    {
+      "id": "om-cut-4",
+      "source": "wood_frog/scene4_liver.jpg",
+      "type": "image",
+      "animation": "pan-right",
+      "in_seconds": 39.82,
+      "out_seconds": 53.4
+    },
+    {
+      "id": "om-cut-5",
+      "source": "wood_frog/scene5_stasis.jpg",
+      "type": "image",
+      "animation": "ken-burns",
+      "in_seconds": 53.4,
+      "out_seconds": 68.7
+    },
+    {
+      "id": "om-cut-6",
+      "source": "wood_frog/scene6_heart.jpg",
+      "type": "image",
+      "animation": "zoom-out",
+      "in_seconds": 68.7,
+      "out_seconds": 78.5
+    },
+    {
+      "id": "om-cut-7",
+      "source": "wood_frog/scene7_lab.jpg",
+      "type": "image",
+      "animation": "pan-left",
+      "in_seconds": 78.5,
+      "out_seconds": 90.46
+    },
+    {
+      "id": "om-cut-8",
+      "source": "wood_frog/scene8_zen.jpg",
+      "type": "image",
+      "animation": "ken-burns",
+      "in_seconds": 90.46,
+      "out_seconds": 103.54
+    }
+  ],
+  "captions": [
+    {
+      "word": "Imagine",
+      "startMs": 101,
+      "endMs": 675
+    },
+    {
+      "word": "waking",
+      "startMs": 688,
+      "endMs": 1045
+    },
+    {
+      "word": "up",
+      "startMs": 1058,
+      "endMs": 1223
+    },
+    {
+      "word": "after",
+      "startMs": 1236,
+      "endMs": 1530
+    },
+    {
+      "word": "being",
+      "startMs": 1542,
+      "endMs": 1772
+    },
+    {
+      "word": "frozen",
+      "startMs": 1785,
+      "endMs": 2257
+    },
+    {
+      "word": "solid",
+      "startMs": 2269,
+      "endMs": 2792
+    },
+    {
+      "word": "Your",
+      "startMs": 3673,
+      "endMs": 3903
+    },
+    {
+      "word": "heart",
+      "startMs": 3916,
+      "endMs": 4209
+    },
+    {
+      "word": "has",
+      "startMs": 4222,
+      "endMs": 4413
+    },
+    {
+      "word": "stopped",
+      "startMs": 4426,
+      "endMs": 4987
+    },
+    {
+      "word": "Your",
+      "startMs": 5867,
+      "endMs": 6110
+    },
+    {
+      "word": "blood",
+      "startMs": 6122,
+      "endMs": 6441
+    },
+    {
+      "word": "has",
+      "startMs": 6454,
+      "endMs": 6658
+    },
+    {
+      "word": "ceased",
+      "startMs": 6671,
+      "endMs": 7015
+    },
+    {
+      "word": "moving",
+      "startMs": 7028,
+      "endMs": 7500
+    },
+    {
+      "word": "By",
+      "startMs": 8380,
+      "endMs": 8610
+    },
+    {
+      "word": "every",
+      "startMs": 8622,
+      "endMs": 8980
+    },
+    {
+      "word": "ordinary",
+      "startMs": 8992,
+      "endMs": 9477
+    },
+    {
+      "word": "law",
+      "startMs": 9490,
+      "endMs": 9821
+    },
+    {
+      "word": "of",
+      "startMs": 9834,
+      "endMs": 9987
+    },
+    {
+      "word": "biology",
+      "startMs": 10000,
+      "endMs": 10650
+    },
+    {
+      "word": "you",
+      "startMs": 10944,
+      "endMs": 10995
+    },
+    {
+      "word": "should",
+      "startMs": 11008,
+      "endMs": 11224
+    },
+    {
+      "word": "be",
+      "startMs": 11237,
+      "endMs": 11352
+    },
+    {
+      "word": "dead",
+      "startMs": 11365,
+      "endMs": 11798
+    },
+    {
+      "word": "Every",
+      "startMs": 12801,
+      "endMs": 13120
+    },
+    {
+      "word": "winter",
+      "startMs": 13133,
+      "endMs": 13540
+    },
+    {
+      "word": "across",
+      "startMs": 13553,
+      "endMs": 13962
+    },
+    {
+      "word": "North",
+      "startMs": 13974,
+      "endMs": 14254
+    },
+    {
+      "word": "America",
+      "startMs": 14267,
+      "endMs": 14791
+    },
+    {
+      "word": "the",
+      "startMs": 15046,
+      "endMs": 15148
+    },
+    {
+      "word": "wood",
+      "startMs": 15161,
+      "endMs": 15326
+    },
+    {
+      "word": "frog",
+      "startMs": 15338,
+      "endMs": 15722
+    },
+    {
+      "word": "faces",
+      "startMs": 15735,
+      "endMs": 16168
+    },
+    {
+      "word": "temperatures",
+      "startMs": 16180,
+      "endMs": 16704
+    },
+    {
+      "word": "plunging",
+      "startMs": 16717,
+      "endMs": 17176
+    },
+    {
+      "word": "far",
+      "startMs": 17189,
+      "endMs": 17494
+    },
+    {
+      "word": "below",
+      "startMs": 17508,
+      "endMs": 17814
+    },
+    {
+      "word": "freezing",
+      "startMs": 17827,
+      "endMs": 18413
+    },
+    {
+      "word": "They",
+      "startMs": 19294,
+      "endMs": 19473
+    },
+    {
+      "word": "cannot",
+      "startMs": 19485,
+      "endMs": 19855
+    },
+    {
+      "word": "migrate",
+      "startMs": 19868,
+      "endMs": 20404
+    },
+    {
+      "word": "thousands",
+      "startMs": 20416,
+      "endMs": 20927
+    },
+    {
+      "word": "of",
+      "startMs": 20939,
+      "endMs": 21029
+    },
+    {
+      "word": "kilometers",
+      "startMs": 21042,
+      "endMs": 21833
+    },
+    {
+      "word": "They",
+      "startMs": 22713,
+      "endMs": 22891
+    },
+    {
+      "word": "cannot",
+      "startMs": 22904,
+      "endMs": 23287
+    },
+    {
+      "word": "build",
+      "startMs": 23299,
+      "endMs": 23593
+    },
+    {
+      "word": "warm",
+      "startMs": 23606,
+      "endMs": 23899
+    },
+    {
+      "word": "shelters",
+      "startMs": 23912,
+      "endMs": 24639
+    },
+    {
+      "word": "So",
+      "startMs": 25519,
+      "endMs": 25747
+    },
+    {
+      "word": "they",
+      "startMs": 25761,
+      "endMs": 25901
+    },
+    {
+      "word": "do",
+      "startMs": 25914,
+      "endMs": 26106
+    },
+    {
+      "word": "something",
+      "startMs": 26118,
+      "endMs": 26514
+    },
+    {
+      "word": "extraordinary",
+      "startMs": 26527,
+      "endMs": 27407
+    },
+    {
+      "word": "When",
+      "startMs": 28400,
+      "endMs": 28630
+    },
+    {
+      "word": "water",
+      "startMs": 28642,
+      "endMs": 28948
+    },
+    {
+      "word": "freezes",
+      "startMs": 28961,
+      "endMs": 29561
+    },
+    {
+      "word": "ice",
+      "startMs": 29816,
+      "endMs": 30034
+    },
+    {
+      "word": "crystals",
+      "startMs": 30045,
+      "endMs": 30517
+    },
+    {
+      "word": "expand",
+      "startMs": 30531,
+      "endMs": 31054
+    },
+    {
+      "word": "like",
+      "startMs": 31066,
+      "endMs": 31232
+    },
+    {
+      "word": "sharp",
+      "startMs": 31244,
+      "endMs": 31589
+    },
+    {
+      "word": "glass",
+      "startMs": 31602,
+      "endMs": 32099
+    },
+    {
+      "word": "shredding",
+      "startMs": 32330,
+      "endMs": 32724
+    },
+    {
+      "word": "delicate",
+      "startMs": 32738,
+      "endMs": 33209
+    },
+    {
+      "word": "cell",
+      "startMs": 33221,
+      "endMs": 33529
+    },
+    {
+      "word": "membranes",
+      "startMs": 33541,
+      "endMs": 34294
+    },
+    {
+      "word": "If",
+      "startMs": 35175,
+      "endMs": 35366
+    },
+    {
+      "word": "ice",
+      "startMs": 35379,
+      "endMs": 35660
+    },
+    {
+      "word": "formed",
+      "startMs": 35672,
+      "endMs": 36004
+    },
+    {
+      "word": "inside",
+      "startMs": 36016,
+      "endMs": 36501
+    },
+    {
+      "word": "vital",
+      "startMs": 36513,
+      "endMs": 36870
+    },
+    {
+      "word": "organs",
+      "startMs": 36884,
+      "endMs": 37407
+    },
+    {
+      "word": "the",
+      "startMs": 37572,
+      "endMs": 37712
+    },
+    {
+      "word": "damage",
+      "startMs": 37726,
+      "endMs": 38134
+    },
+    {
+      "word": "would",
+      "startMs": 38147,
+      "endMs": 38274
+    },
+    {
+      "word": "be",
+      "startMs": 38287,
+      "endMs": 38402
+    },
+    {
+      "word": "fatal",
+      "startMs": 38415,
+      "endMs": 38937
+    },
+    {
+      "word": "To",
+      "startMs": 39920,
+      "endMs": 40048
+    },
+    {
+      "word": "prevent",
+      "startMs": 40060,
+      "endMs": 40443
+    },
+    {
+      "word": "this",
+      "startMs": 40456,
+      "endMs": 40647
+    },
+    {
+      "word": "catastrophe",
+      "startMs": 40660,
+      "endMs": 41476
+    },
+    {
+      "word": "the",
+      "startMs": 41731,
+      "endMs": 41833
+    },
+    {
+      "word": "frog's",
+      "startMs": 41846,
+      "endMs": 42292
+    },
+    {
+      "word": "liver",
+      "startMs": 42305,
+      "endMs": 42586
+    },
+    {
+      "word": "converts",
+      "startMs": 42599,
+      "endMs": 43058
+    },
+    {
+      "word": "stored",
+      "startMs": 43071,
+      "endMs": 43377
+    },
+    {
+      "word": "glycogen",
+      "startMs": 43389,
+      "endMs": 43963
+    },
+    {
+      "word": "into",
+      "startMs": 43976,
+      "endMs": 44193
+    },
+    {
+      "word": "a",
+      "startMs": 44206,
+      "endMs": 44257
+    },
+    {
+      "word": "massive",
+      "startMs": 44269,
+      "endMs": 44729
+    },
+    {
+      "word": "surge",
+      "startMs": 44741,
+      "endMs": 45073
+    },
+    {
+      "word": "of",
+      "startMs": 45086,
+      "endMs": 45188
+    },
+    {
+      "word": "glucose",
+      "startMs": 45201,
+      "endMs": 45826
+    },
+    {
+      "word": "flooding",
+      "startMs": 46119,
+      "endMs": 46489
+    },
+    {
+      "word": "the",
+      "startMs": 46502,
+      "endMs": 46591
+    },
+    {
+      "word": "bloodstream",
+      "startMs": 46604,
+      "endMs": 47178
+    },
+    {
+      "word": "with",
+      "startMs": 47190,
+      "endMs": 47331
+    },
+    {
+      "word": "natural",
+      "startMs": 47343,
+      "endMs": 47764
+    },
+    {
+      "word": "cryoprotectant",
+      "startMs": 47777,
+      "endMs": 48593
+    },
+    {
+      "word": "sugar",
+      "startMs": 48606,
+      "endMs": 49104
+    },
+    {
+      "word": "Up",
+      "startMs": 50100,
+      "endMs": 50304
+    },
+    {
+      "word": "to",
+      "startMs": 50317,
+      "endMs": 50419
+    },
+    {
+      "word": "seventy",
+      "startMs": 50432,
+      "endMs": 50827
+    },
+    {
+      "word": "percent",
+      "startMs": 50840,
+      "endMs": 51248
+    },
+    {
+      "word": "of",
+      "startMs": 51261,
+      "endMs": 51337
+    },
+    {
+      "word": "the",
+      "startMs": 51350,
+      "endMs": 51439
+    },
+    {
+      "word": "frog's",
+      "startMs": 51452,
+      "endMs": 51911
+    },
+    {
+      "word": "body",
+      "startMs": 51924,
+      "endMs": 52256
+    },
+    {
+      "word": "water",
+      "startMs": 52268,
+      "endMs": 52600
+    },
+    {
+      "word": "freezes",
+      "startMs": 52613,
+      "endMs": 53085
+    },
+    {
+      "word": "solid",
+      "startMs": 53097,
+      "endMs": 53608
+    },
+    {
+      "word": "Zero",
+      "startMs": 54489,
+      "endMs": 54948
+    },
+    {
+      "word": "heartbeat",
+      "startMs": 54961,
+      "endMs": 55586
+    },
+    {
+      "word": "Zero",
+      "startMs": 56466,
+      "endMs": 56925
+    },
+    {
+      "word": "brain",
+      "startMs": 56938,
+      "endMs": 57269
+    },
+    {
+      "word": "activity",
+      "startMs": 57282,
+      "endMs": 57958
+    },
+    {
+      "word": "For",
+      "startMs": 58838,
+      "endMs": 59055
+    },
+    {
+      "word": "months",
+      "startMs": 59068,
+      "endMs": 59374
+    },
+    {
+      "word": "beneath",
+      "startMs": 59387,
+      "endMs": 59731
+    },
+    {
+      "word": "the",
+      "startMs": 59744,
+      "endMs": 59846
+    },
+    {
+      "word": "snow",
+      "startMs": 59859,
+      "endMs": 60305
+    },
+    {
+      "word": "life",
+      "startMs": 60547,
+      "endMs": 60815
+    },
+    {
+      "word": "does",
+      "startMs": 60828,
+      "endMs": 60981
+    },
+    {
+      "word": "not",
+      "startMs": 60994,
+      "endMs": 61249
+    },
+    {
+      "word": "die",
+      "startMs": 61262,
+      "endMs": 61606
+    },
+    {
+      "word": "it",
+      "startMs": 61899,
+      "endMs": 62065
+    },
+    {
+      "word": "pauses",
+      "startMs": 62078,
+      "endMs": 62780
+    },
+    {
+      "word": "Then",
+      "startMs": 63780,
+      "endMs": 64086
+    },
+    {
+      "word": "spring",
+      "startMs": 64099,
+      "endMs": 64470
+    },
+    {
+      "word": "arrives",
+      "startMs": 64482,
+      "endMs": 65170
+    },
+    {
+      "word": "The",
+      "startMs": 66051,
+      "endMs": 66217
+    },
+    {
+      "word": "ice",
+      "startMs": 66231,
+      "endMs": 66511
+    },
+    {
+      "word": "begins",
+      "startMs": 66523,
+      "endMs": 66933
+    },
+    {
+      "word": "to",
+      "startMs": 66945,
+      "endMs": 67047
+    },
+    {
+      "word": "melt",
+      "startMs": 67059,
+      "endMs": 67518
+    },
+    {
+      "word": "Within",
+      "startMs": 68398,
+      "endMs": 68808
+    },
+    {
+      "word": "hours",
+      "startMs": 68820,
+      "endMs": 69318
+    },
+    {
+      "word": "without",
+      "startMs": 69433,
+      "endMs": 69865
+    },
+    {
+      "word": "any",
+      "startMs": 69878,
+      "endMs": 70095
+    },
+    {
+      "word": "external",
+      "startMs": 70109,
+      "endMs": 70592
+    },
+    {
+      "word": "intervention",
+      "startMs": 70606,
+      "endMs": 71268
+    },
+    {
+      "word": "the",
+      "startMs": 71536,
+      "endMs": 71625
+    },
+    {
+      "word": "heart",
+      "startMs": 71639,
+      "endMs": 71933
+    },
+    {
+      "word": "spontaneously",
+      "startMs": 71945,
+      "endMs": 72863
+    },
+    {
+      "word": "restarts",
+      "startMs": 72875,
+      "endMs": 73642
+    },
+    {
+      "word": "Blood",
+      "startMs": 74521,
+      "endMs": 74892
+    },
+    {
+      "word": "flows",
+      "startMs": 74904,
+      "endMs": 75606
+    },
+    {
+      "word": "Life",
+      "startMs": 76485,
+      "endMs": 76842
+    },
+    {
+      "word": "resumes",
+      "startMs": 76856,
+      "endMs": 77621
+    },
+    {
+      "word": "This",
+      "startMs": 78610,
+      "endMs": 78865
+    },
+    {
+      "word": "natural",
+      "startMs": 78878,
+      "endMs": 79338
+    },
+    {
+      "word": "miracle",
+      "startMs": 79350,
+      "endMs": 79860
+    },
+    {
+      "word": "holds",
+      "startMs": 79874,
+      "endMs": 80179
+    },
+    {
+      "word": "the",
+      "startMs": 80193,
+      "endMs": 80306
+    },
+    {
+      "word": "key",
+      "startMs": 80320,
+      "endMs": 80676
+    },
+    {
+      "word": "to",
+      "startMs": 80690,
+      "endMs": 80791
+    },
+    {
+      "word": "human",
+      "startMs": 80804,
+      "endMs": 81175
+    },
+    {
+      "word": "medicine",
+      "startMs": 81187,
+      "endMs": 81773
+    },
+    {
+      "word": "Understanding",
+      "startMs": 82654,
+      "endMs": 83381
+    },
+    {
+      "word": "freeze",
+      "startMs": 83395,
+      "endMs": 83777
+    },
+    {
+      "word": "tolerance",
+      "startMs": 83791,
+      "endMs": 84314
+    },
+    {
+      "word": "could",
+      "startMs": 84326,
+      "endMs": 84478
+    },
+    {
+      "word": "revolutionize",
+      "startMs": 84491,
+      "endMs": 85295
+    },
+    {
+      "word": "human",
+      "startMs": 85308,
+      "endMs": 85588
+    },
+    {
+      "word": "organ",
+      "startMs": 85601,
+      "endMs": 85895
+    },
+    {
+      "word": "preservation",
+      "startMs": 85907,
+      "endMs": 86597
+    },
+    {
+      "word": "extending",
+      "startMs": 86865,
+      "endMs": 87399
+    },
+    {
+      "word": "transplant",
+      "startMs": 87413,
+      "endMs": 87999
+    },
+    {
+      "word": "windows",
+      "startMs": 88012,
+      "endMs": 88407
+    },
+    {
+      "word": "from",
+      "startMs": 88420,
+      "endMs": 88547
+    },
+    {
+      "word": "hours",
+      "startMs": 88561,
+      "endMs": 88955
+    },
+    {
+      "word": "to",
+      "startMs": 88969,
+      "endMs": 89071
+    },
+    {
+      "word": "months",
+      "startMs": 89083,
+      "endMs": 89580
+    },
+    {
+      "word": "In",
+      "startMs": 90561,
+      "endMs": 90777
+    },
+    {
+      "word": "nature",
+      "startMs": 90791,
+      "endMs": 91223
+    },
+    {
+      "word": "life",
+      "startMs": 91428,
+      "endMs": 91683
+    },
+    {
+      "word": "does",
+      "startMs": 91696,
+      "endMs": 91848
+    },
+    {
+      "word": "not",
+      "startMs": 91862,
+      "endMs": 92104
+    },
+    {
+      "word": "always",
+      "startMs": 92116,
+      "endMs": 92487
+    },
+    {
+      "word": "win",
+      "startMs": 92500,
+      "endMs": 92755
+    },
+    {
+      "word": "by",
+      "startMs": 92768,
+      "endMs": 92895
+    },
+    {
+      "word": "becoming",
+      "startMs": 92907,
+      "endMs": 93366
+    },
+    {
+      "word": "stronger",
+      "startMs": 93380,
+      "endMs": 94018
+    },
+    {
+      "word": "Sometimes",
+      "startMs": 94899,
+      "endMs": 95574
+    },
+    {
+      "word": "it",
+      "startMs": 95588,
+      "endMs": 95690
+    },
+    {
+      "word": "survives",
+      "startMs": 95702,
+      "endMs": 96301
+    },
+    {
+      "word": "by",
+      "startMs": 96315,
+      "endMs": 96442
+    },
+    {
+      "word": "becoming",
+      "startMs": 96455,
+      "endMs": 96913
+    },
+    {
+      "word": "quieter",
+      "startMs": 96926,
+      "endMs": 97500
+    },
+    {
+      "word": "By",
+      "startMs": 98381,
+      "endMs": 98571
+    },
+    {
+      "word": "slowing",
+      "startMs": 98585,
+      "endMs": 99095
+    },
+    {
+      "word": "down",
+      "startMs": 99107,
+      "endMs": 99580
+    },
+    {
+      "word": "And",
+      "startMs": 100460,
+      "endMs": 100625
+    },
+    {
+      "word": "allowing",
+      "startMs": 100639,
+      "endMs": 101071
+    },
+    {
+      "word": "the",
+      "startMs": 101085,
+      "endMs": 101187
+    },
+    {
+      "word": "world",
+      "startMs": 101199,
+      "endMs": 101530
+    },
+    {
+      "word": "to",
+      "startMs": 101544,
+      "endMs": 101645
+    },
+    {
+      "word": "freeze",
+      "startMs": 101658,
+      "endMs": 102015
+    },
+    {
+      "word": "around",
+      "startMs": 102029,
+      "endMs": 102411
+    },
+    {
+      "word": "it",
+      "startMs": 102423,
+      "endMs": 102640
+    }
+  ],
+  "audio": {
+    "narration": {
+      "src": "wood_frog/narration.mp3",
+      "volume": 1.0
+    },
+    "music": {
+      "src": "wood_frog/music.mp3",
+      "volume": 0.12,
+      "fadeInSeconds": 2,
+      "fadeOutSeconds": 3,
+      "loop": true
+    }
+  },
+  "overlays": [
+    {
+      "type": "stat_reveal",
+      "in_seconds": 7.0,
+      "out_seconds": 11.5,
+      "text": "0 BPM",
+      "subtitle": "Heart Stopped \u2022 Circulation Ceased",
+      "accentColor": "#00E5FF",
+      "position": "bottom-right"
+    },
+    {
+      "type": "stat_reveal",
+      "in_seconds": 18.0,
+      "out_seconds": 23.0,
+      "text": "-20\u00b0C",
+      "subtitle": "Sub-arctic Ground Temperature",
+      "accentColor": "#38EF7D",
+      "position": "bottom-right"
+    },
+    {
+      "type": "section_title",
+      "in_seconds": 32.5,
+      "out_seconds": 37.5,
+      "text": "EXTRACELLULAR CRYSTALLIZATION",
+      "subtitle": "Ice restricted to spaces outside living cells",
+      "accentColor": "#00E5FF",
+      "position": "top-left"
+    },
+    {
+      "type": "stat_reveal",
+      "in_seconds": 44.5,
+      "out_seconds": 49.5,
+      "text": "65%",
+      "subtitle": "Total Body Water Frozen Solid",
+      "accentColor": "#00E5FF",
+      "position": "bottom-right"
+    },
+    {
+      "type": "section_title",
+      "in_seconds": 57.0,
+      "out_seconds": 62.5,
+      "text": "GLUCOSE ANTIFREEZE",
+      "subtitle": "Liver floods cells with natural cryoprotectant",
+      "accentColor": "#F59E0B",
+      "position": "top-left"
+    },
+    {
+      "type": "stat_reveal",
+      "in_seconds": 71.5,
+      "out_seconds": 76.0,
+      "text": "SUSPENDED",
+      "subtitle": "Zero Brain Waves \u2022 Zero Breathing",
+      "accentColor": "#A78BFA",
+      "position": "bottom-right"
+    },
+    {
+      "type": "section_title",
+      "in_seconds": 82.5,
+      "out_seconds": 87.5,
+      "text": "HUMAN CRYO-STASIS",
+      "subtitle": "Extending organ preservation from hours to weeks",
+      "accentColor": "#38EF7D",
+      "position": "top-left"
+    }
+  ]
+}

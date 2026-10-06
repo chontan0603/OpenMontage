@@ -114,10 +114,16 @@ const PageRenderer: React.FC<{
                 key={`${w.startMs}-${i}`}
                 style={{
                   // Keep each word unbroken so lines wrap only at word
-                  // boundaries. For space-delimited text this matches the
-                  // previous behavior; for CJK it prevents mid-word breaks.
+                  // boundaries. Use explicit marginRight to ensure spacing
+                  // never collapses between adjacent inline-block elements.
                   display: "inline-block",
                   whiteSpace: "nowrap",
+                  marginRight:
+                    i < page.words.length - 1
+                      ? wordSeparator === ""
+                        ? 0
+                        : "0.32em"
+                      : 0,
                   color: isActive ? highlightColor : isPast ? color : `${color}99`,
                   transition: "none", // CSS transitions forbidden in Remotion
                   textShadow: isActive
@@ -125,7 +131,10 @@ const PageRenderer: React.FC<{
                     : "0 2px 4px rgba(0,0,0,0.5)",
                 }}
               >
-                {w.word}{i < page.words.length - 1 ? wordSeparator : ""}
+                {w.word}
+                {wordSeparator && wordSeparator !== " " && i < page.words.length - 1
+                  ? wordSeparator
+                  : ""}
               </span>
             );
           })}
