@@ -78,8 +78,10 @@ const PageRenderer: React.FC<{
     config: { damping: 18, stiffness: 120 },
   });
 
+  const Container = AbsoluteFill as any;
+
   return (
-    <AbsoluteFill
+    <Container
       style={{
         justifyContent: "flex-end",
         alignItems: "center",
@@ -140,7 +142,7 @@ const PageRenderer: React.FC<{
           })}
         </span>
       </div>
-    </AbsoluteFill>
+    </Container>
   );
 };
 
@@ -157,8 +159,11 @@ export const CaptionOverlay: React.FC<CaptionOverlayProps> = ({
   const { fps } = useVideoConfig();
   const pages = buildPages(words, wordsPerPage);
 
+  const Container = AbsoluteFill as any;
+  const Seq = Sequence as any;
+
   return (
-    <AbsoluteFill>
+    <Container>
       {pages.map((page, i) => {
         const fromFrame = Math.round((page.startMs / 1000) * fps);
         const nextStart = pages[i + 1]?.startMs ?? page.endMs + 500;
@@ -168,7 +173,7 @@ export const CaptionOverlay: React.FC<CaptionOverlayProps> = ({
         );
 
         return (
-          <Sequence key={i} from={fromFrame} durationInFrames={duration}>
+          <Seq key={i} from={fromFrame} durationInFrames={duration}>
             <PageRenderer
               page={page}
               fontSize={fontSize}
@@ -178,9 +183,9 @@ export const CaptionOverlay: React.FC<CaptionOverlayProps> = ({
               fontFamily={fontFamily}
               wordSeparator={wordSeparator}
             />
-          </Sequence>
+          </Seq>
         );
       })}
-    </AbsoluteFill>
+    </Container>
   );
 };

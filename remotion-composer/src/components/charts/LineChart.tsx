@@ -98,8 +98,10 @@ export const LineChart: React.FC<LineChartProps> = ({
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
+  const Container = AbsoluteFill as any;
+
   return (
-    <AbsoluteFill
+    <Container
       style={{
         background: backgroundColor,
         justifyContent: "flex-start",
@@ -375,11 +377,12 @@ export const LineChart: React.FC<LineChartProps> = ({
           </g>
         )}
       </svg>
-    </AbsoluteFill>
+    </Container>
   );
 };
 
 function formatNumber(n: number): string {
+  if (n >= 1900 && n <= 2100 && Number.isInteger(n)) return String(n);
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
   if (n >= 1_000) return `${(n / 1_000).toFixed(1)}K`;
   if (Number.isInteger(n)) return String(n);

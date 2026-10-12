@@ -57,34 +57,36 @@ export const TerminalScene: React.FC<TerminalSceneProps> = ({
   let cursorFrame = 0;
 
   for (const step of steps) {
-    if (step.kind === "cmd") {
-      const speed = step.typeSpeed ?? 0.035; // seconds per char
-      const typeFrames = Math.ceil(step.text.length * speed * fps);
-      const hold = Math.ceil((step.holdSeconds ?? 0.3) * fps);
+    const s = step as any;
+    const kind = s.kind || (s.type === "command" ? "cmd" : s.type === "output" ? "out" : s.type);
+    if (kind === "cmd" || kind === "command") {
+      const speed = s.typeSpeed ?? 0.035; // seconds per char
+      const typeFrames = Math.ceil(((s.text || "").length) * speed * fps);
+      const hold = Math.ceil((s.holdSeconds ?? 0.3) * fps);
       lines.push({
-        text: step.text,
+        text: s.text || "",
         isCmd: true,
         startFrame: cursorFrame,
         endFrame: cursorFrame + typeFrames,
       });
       cursorFrame += typeFrames + hold;
-    } else if (step.kind === "out") {
+    } else if (kind === "out" || kind === "output") {
       const revealFrames = Math.max(2, Math.ceil(0.08 * fps));
-      const hold = Math.ceil((step.holdSeconds ?? 0.15) * fps);
+      const hold = Math.ceil((s.holdSeconds ?? 0.15) * fps);
       lines.push({
-        text: step.text,
+        text: s.text || "",
         isCmd: false,
         startFrame: cursorFrame,
         endFrame: cursorFrame + revealFrames,
       });
       cursorFrame += revealFrames + hold;
-    } else if (step.kind === "pause") {
-      cursorFrame += Math.ceil(step.seconds * fps);
-    } else if (step.kind === "pill") {
-      const dur = Math.ceil((step.durationSeconds ?? 2.2) * fps);
+    } else if (kind === "pause") {
+      cursorFrame += Math.ceil((s.seconds || 1) * fps);
+    } else if (kind === "pill") {
+      const dur = Math.ceil((s.durationSeconds ?? 2.2) * fps);
       pills.push({
-        text: step.text,
-        color: step.color ?? accentColor,
+        text: s.text || "",
+        color: s.color ?? accentColor,
         startFrame: cursorFrame,
         endFrame: cursorFrame + dur,
       });
@@ -106,10 +108,13 @@ export const TerminalScene: React.FC<TerminalSceneProps> = ({
   // Terminal window frame fade-in
   const windowOpacity = spring({ frame, fps, config: { damping: 25, stiffness: 100 } });
 
+  // Cast AbsoluteFill to bypass React 19 / Remotion JSX type definition mismatch
+  const Container = AbsoluteFill as any;
+
   return (
-    <AbsoluteFill
+    <Container
       style={{
-        background: backgroundColor,
+        background: backgroundColor === "transparent" ? "transparent" : backgroundColor,
         justifyContent: "center",
         alignItems: "center",
         padding: "80px",
@@ -126,7 +131,9 @@ export const TerminalScene: React.FC<TerminalSceneProps> = ({
           borderRadius: 16,
           overflow: "hidden",
           boxShadow: "0 40px 120px rgba(0,0,0,0.6), 0 0 1px rgba(255,255,255,0.2) inset",
-          background: "#12151F",
+          background: "rgba(18, 21, 31, 0.92)",
+          backdropFilter: "blur(16px)",
+          border: "1px solid rgba(255,255,255,0.08)",
           position: "relative",
         }}
       >
@@ -261,6 +268,6 @@ export const TerminalScene: React.FC<TerminalSceneProps> = ({
             );
           })}
       </div>
-    </AbsoluteFill>
+    </Container>
   );
 };

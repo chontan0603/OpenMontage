@@ -9,80 +9,121 @@ import {
 type HeroTitleProps = {
   title: string;
   subtitle?: string;
-  /** Color of the leading accent characters and the underline. */
   accentColor?: string;
-  /** Color of the remaining title characters. Pass the theme's textColor. */
   textColor?: string;
-  /** Subtitle color. */
   subtitleColor?: string;
-  /**
-   * Scrim painted behind the title so it separates from whatever is underneath.
-   * Defaults to a dark wash; a light theme must pass a light one, otherwise the
-   * scrim darkens the backdrop and cancels out the theme's dark text.
-   */
   scrimBackground?: string;
 };
 
 const DEFAULT_SCRIM =
-  "radial-gradient(ellipse at center, rgba(15,23,42,0.35) 0%, rgba(15,23,42,0.55) 100%)";
+  "radial-gradient(ellipse at center, rgba(15,23,42,0.65) 0%, rgba(15,23,42,0.85) 100%)";
 
 export const HeroTitle: React.FC<HeroTitleProps> = ({
   title,
   subtitle,
-  accentColor = "#22D3EE",
+  accentColor = "#EC4899",
   textColor = "#F8FAFC",
-  subtitleColor = "#A78BFA",
+  subtitleColor = "#94A3B8",
   scrimBackground = DEFAULT_SCRIM,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Staggered letter-by-letter spring
-  const titleChars = title.split("");
+  // Split title into words to guarantee NO awkward mid-word breaks
+  const words = title.split(" ");
+  const isLongTitle = title.length > 35;
+  const titleFontSize = isLongTitle ? 56 : 68;
+
+  // Track global character index for staggered entrance
+  let globalCharIdx = 0;
+
+  // Cast AbsoluteFill to bypass React 19 / Remotion JSX type definition mismatch
+  const Container = AbsoluteFill as any;
 
   return (
-    <AbsoluteFill
+    <Container
       style={{
         justifyContent: "center",
         alignItems: "center",
         background: scrimBackground,
       }}
     >
-      <div style={{ textAlign: "center", maxWidth: "85%" }}>
-        {/* Main title with per-character spring */}
+      <div
+        style={{
+          textAlign: "center",
+          maxWidth: 1440,
+          padding: "0 40px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        {/* Main title with word-safe flexbox and per-letter spring entrance */}
         <div
           style={{
-            fontSize: 72,
+            fontSize: titleFontSize,
             fontWeight: 800,
             fontFamily: "Space Grotesk, Inter, system-ui, sans-serif",
-            lineHeight: 1.2,
+            lineHeight: 1.25,
             display: "flex",
             justifyContent: "center",
             flexWrap: "wrap",
-            gap: 0,
+            rowGap: "12px",
+            letterSpacing: "-0.02em",
           }}
         >
-          {titleChars.map((char, i) => {
-            const delay = i * 1.2;
-            const charSpring = spring({
-              frame: frame - delay,
-              fps,
-              config: { damping: 12, stiffness: 150 },
-            });
+          {words.map((word, wIdx) => {
+            const wordChars = word.split("");
+            // High-impact accent rule: highlight words that contain numbers, dollar signs, or key terms
+            const isAccentedWord =
+              wIdx === 1 ||
+              word.includes("$") ||
+              word.toUpperCase() === "MIDJOURNEY" ||
+              word.toUpperCase() === "TROJAN" ||
+              word.toUpperCase() === "ZERO-VC" ||
+              word.toUpperCase() === "FILTER" ||
+              word.toUpperCase() === "BLUEPRINT";
+
+            const wordColor = isAccentedWord ? accentColor : textColor;
 
             return (
               <span
-                key={i}
+                key={wIdx}
                 style={{
-                  display: "inline-block",
-                  opacity: charSpring,
-                  transform: `translateY(${interpolate(charSpring, [0, 1], [30, 0])}px)`,
-                  color: i < 8 ? accentColor : textColor, // Accent first word
-                  whiteSpace: char === " " ? "pre" : undefined,
-                  minWidth: char === " " ? "0.3em" : undefined,
+                  display: "inline-flex",
+                  whiteSpace: "nowrap",
+                  marginRight: wIdx < words.length - 1 ? "0.32em" : 0,
                 }}
               >
-                {char}
+                {wordChars.map((char, cIdx) => {
+                  const currentIdx = globalCharIdx++;
+                  const charSpring = spring({
+                    frame: frame - currentIdx * 1.0,
+                    fps,
+                    config: { damping: 14, stiffness: 140 },
+                  });
+
+                  return (
+                    <span
+                      key={cIdx}
+                      style={{
+                        display: "inline-block",
+                        opacity: charSpring,
+                        transform: `translateY(${interpolate(
+                          charSpring,
+                          [0, 1],
+                          [24, 0]
+                        )}px)`,
+                        color: wordColor,
+                        textShadow: isAccentedWord
+                          ? `0 0 30px ${accentColor}44`
+                          : "none",
+                      }}
+                    >
+                      {char}
+                    </span>
+                  );
+                })}
               </span>
             );
           })}
@@ -92,43 +133,46 @@ export const HeroTitle: React.FC<HeroTitleProps> = ({
         {subtitle && (
           <div
             style={{
-              marginTop: 20,
+              marginTop: 28,
               opacity: spring({
-                frame: frame - titleChars.length * 1.2 - 5,
+                frame: frame - words.length * 3 - 5,
                 fps,
                 config: { damping: 20 },
               }),
-              fontSize: 28,
-              fontWeight: 400,
+              fontSize: 26,
+              fontWeight: 500,
               color: subtitleColor,
               fontFamily: "Space Grotesk, Inter, system-ui, sans-serif",
-              letterSpacing: "0.1em",
+              letterSpacing: "0.08em",
               textTransform: "uppercase",
+              maxWidth: 960,
+              lineHeight: 1.4,
             }}
           >
             {subtitle}
           </div>
         )}
 
-        {/* Animated underline */}
+        {/* Animated neon underline */}
         <div
           style={{
-            margin: "24px auto 0",
-            height: 3,
+            marginTop: 24,
+            height: 4,
             backgroundColor: accentColor,
             borderRadius: 2,
+            boxShadow: `0 0 16px ${accentColor}`,
             width: interpolate(
               spring({
                 frame: frame - 15,
                 fps,
-                config: { damping: 15, stiffness: 60 },
+                config: { damping: 18 },
               }),
               [0, 1],
-              [0, 400]
+              [0, 180]
             ),
           }}
         />
       </div>
-    </AbsoluteFill>
+    </Container>
   );
 };

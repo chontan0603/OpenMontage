@@ -6,7 +6,7 @@ import {
   useVideoConfig,
 } from "remotion";
 
-type CalloutType = "info" | "warning" | "tip" | "quote";
+type CalloutType = "info" | "warning" | "tip" | "quote" | "insight";
 
 interface CalloutBoxProps {
   text: string;
@@ -30,6 +30,7 @@ const TYPE_DEFAULTS: Record<
   warning: { icon: "\u26A0\uFE0F", border: "#F59E0B", bg: "#FFFBEB" },
   tip: { icon: "\uD83D\uDCA1", border: "#10B981", bg: "#ECFDF5" },
   quote: { icon: "\u201C", border: "#9CA3AF", bg: "#F9FAFB" },
+  insight: { icon: "\uD83D\uDD2E", border: "#7C3AED", bg: "#1E1B4B" },
 };
 
 export const CalloutBox: React.FC<CalloutBoxProps> = ({
@@ -48,7 +49,7 @@ export const CalloutBox: React.FC<CalloutBoxProps> = ({
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const defaults = TYPE_DEFAULTS[type];
+  const defaults = TYPE_DEFAULTS[type] || TYPE_DEFAULTS.info;
   const resolvedBorder = borderColor || defaults.border;
   const resolvedBg = backgroundColor || defaults.bg;
   const resolvedIcon = icon || defaults.icon;
@@ -108,8 +109,10 @@ export const CalloutBox: React.FC<CalloutBoxProps> = ({
   // Quote type uses italic styling
   const isQuote = type === "quote";
 
+  const Container = AbsoluteFill as any;
+
   return (
-    <AbsoluteFill
+    <Container
       style={{
         background: containerBackgroundColor,
         justifyContent: "center",
@@ -208,6 +211,6 @@ export const CalloutBox: React.FC<CalloutBoxProps> = ({
           </div>
         </div>
       </div>
-    </AbsoluteFill>
+    </Container>
   );
 };

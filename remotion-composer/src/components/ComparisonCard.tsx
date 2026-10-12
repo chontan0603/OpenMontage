@@ -32,21 +32,24 @@ export const ComparisonCard: React.FC<ComparisonCardProps> = ({
   rightLabel,
   leftValue,
   rightValue,
-  leftColor = "#2563EB",
-  rightColor = "#10B981",
+  leftColor = "#EC4899",
+  rightColor = "#06B6D4",
   title,
   changeIndicator,
   changeDirection = "neutral",
-  backgroundColor = "#FFFFFF",
-  cardBackgroundColor = "#F3F4F6",
-  textColor = "#1F2937",
-  fontFamily = "Inter, system-ui, sans-serif",
+  backgroundColor = "transparent",
+  cardBackgroundColor = "rgba(30, 41, 59, 0.9)",
+  textColor = "#F8FAFC",
+  fontFamily = "Space Grotesk, Inter, system-ui, sans-serif",
   titleFontSize = 44,
-  labelFontSize = 28,
-  valueFontSize = 72,
+  labelFontSize = 26,
+  valueFontSize,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+
+  const leftSize = valueFontSize || (leftValue.length > 30 ? 24 : leftValue.length > 15 ? 36 : 60);
+  const rightSize = valueFontSize || (rightValue.length > 30 ? 24 : rightValue.length > 15 ? 36 : 60);
 
   // Phase 1: Title + left side appears
   const titleOpacity = spring({
@@ -131,8 +134,10 @@ export const ComparisonCard: React.FC<ComparisonCardProps> = ({
         ? "#EF4444"
         : "#9CA3AF";
 
+  const Container = AbsoluteFill as any;
+
   return (
-    <AbsoluteFill
+    <Container
       style={{
         background: backgroundColor,
         justifyContent: "center",
@@ -221,9 +226,10 @@ export const ComparisonCard: React.FC<ComparisonCardProps> = ({
               style={{
                 fontFamily,
                 fontWeight: 800,
-                fontSize: valueFontSize,
+                fontSize: leftSize,
                 color: leftColor,
-                lineHeight: 1.1,
+                lineHeight: 1.25,
+                textAlign: "center" as const,
               }}
             >
               {leftValue}
@@ -345,9 +351,10 @@ export const ComparisonCard: React.FC<ComparisonCardProps> = ({
               style={{
                 fontFamily,
                 fontWeight: 800,
-                fontSize: valueFontSize,
+                fontSize: rightSize,
                 color: rightColor,
-                lineHeight: 1.1,
+                lineHeight: 1.25,
+                textAlign: "center" as const,
               }}
             >
               {rightValue}
@@ -355,6 +362,6 @@ export const ComparisonCard: React.FC<ComparisonCardProps> = ({
           </div>
         </div>
       </div>
-    </AbsoluteFill>
+    </Container>
   );
 };

@@ -30,6 +30,10 @@ import type { TerminalStep } from "./components/TerminalScene";
 import { ScreenshotScene } from "./components/ScreenshotScene";
 import type { ScreenshotStep } from "./components/ScreenshotScene";
 import { ProviderChip } from "./components/ProviderChip";
+import { MidjourneyDiscordScene } from "./components/MidjourneyDiscordScene";
+import { MidjourneyWebScene } from "./components/MidjourneyWebScene";
+import { ActionChecklist } from "./components/ActionChecklist";
+import { TitleTakeover } from "./components/TitleTakeover";
 import { resolveAsset } from "./lib/resolveAsset";
 import type { ParticleType } from "./components/ParticleOverlay";
 import { resolveTheme, type ThemeConfig, DEFAULT_THEME } from "./Root";
@@ -39,6 +43,13 @@ const { fontFamily } = loadFont("normal", {
   weights: ["400", "700"],
   subsets: ["latin"],
 });
+
+// React 19 JSX compatibility wrappers for Remotion v4 built-in components
+const AbsoluteFillElement = AbsoluteFill as any;
+const ImgElement = Img as any;
+const OffthreadVideoElement = OffthreadVideo as any;
+const SequenceElement = Sequence as any;
+const AudioElement = Audio as any;
 
 // ---------------------------------------------------------------------------
 // Animated Background — Gradient Mesh + Floating Orbs
@@ -129,7 +140,7 @@ const AnimatedBackground: React.FC<{ theme: ThemeConfig }> = ({ theme }) => {
     : `rgba(${bgR},${bgG},${bgB},0.4)`;
 
   return (
-    <AbsoluteFill style={{ background: gradient }}>
+    <AbsoluteFillElement style={{ background: gradient }}>
       {/* Floating glow orbs */}
       {orbs.map((orb, i) => {
         const ox = orb.x + Math.sin(frame / (fps * orb.speedX)) * 15;
@@ -179,7 +190,7 @@ const AnimatedBackground: React.FC<{ theme: ThemeConfig }> = ({ theme }) => {
           background: `linear-gradient(to bottom, ${fadeColor}, transparent)`,
         }}
       />
-    </AbsoluteFill>
+    </AbsoluteFillElement>
   );
 };
 
@@ -200,6 +211,7 @@ interface Cut {
   subtitle?: string;
   callout_type?: "info" | "warning" | "tip" | "quote";
   title?: string;
+  quadrants?: string[];
   // Video source trim — seek to this point in the source before playback.
   // Defaults to 0 (play from beginning). Use this instead of in_seconds for source trimming.
   source_in_seconds?: number;
@@ -231,6 +243,10 @@ interface Cut {
   progressSegments?: any[];
   // Hero title props (when used as scene, not overlay)
   heroSubtitle?: string;
+  // CreatorMotion & HyperFrames props
+  tasks?: any[];
+  supportingLine?: string;
+  badge?: string;
   // Styling overrides
   backgroundColor?: string;
   cardBackgroundColor?: string; // Inner card surface (comparison); defaults to theme.surfaceColor
@@ -339,7 +355,7 @@ function isVideo(source: string): boolean {
 // ---------------------------------------------------------------------------
 
 const Vignette: React.FC = () => (
-  <AbsoluteFill
+  <AbsoluteFillElement
     style={{
       background:
         "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.6) 100%)",
@@ -403,8 +419,8 @@ const ImageScene: React.FC<{ src: string; animation?: string }> = ({
   // "static" or "none" → just display
 
   return (
-    <AbsoluteFill style={{ overflow: "hidden", background: "#0F172A" }}>
-      <Img
+    <AbsoluteFillElement style={{ overflow: "hidden", background: "#0F172A" }}>
+      <ImgElement
         src={resolveAsset(src)}
         style={{
           width: "100%",
@@ -416,7 +432,7 @@ const ImageScene: React.FC<{ src: string; animation?: string }> = ({
         }}
       />
       <Vignette />
-    </AbsoluteFill>
+    </AbsoluteFillElement>
   );
 };
 
@@ -466,8 +482,8 @@ const VideoScene: React.FC<{
       });
 
   return (
-    <AbsoluteFill style={{ background: backgroundColor }}>
-      <OffthreadVideo
+    <AbsoluteFillElement style={{ background: backgroundColor }}>
+      <OffthreadVideoElement
         src={resolveAsset(src)}
         startFrom={Math.round(startFrom * fps)}
         style={{
@@ -479,7 +495,7 @@ const VideoScene: React.FC<{
         muted
       />
       <Vignette />
-    </AbsoluteFill>
+    </AbsoluteFillElement>
   );
 };
 
@@ -504,9 +520,9 @@ const BackgroundImageLayer: React.FC<{
   const bgScale = 1 + progress * 0.08;
 
   return (
-    <AbsoluteFill style={{ overflow: "hidden" }}>
+    <AbsoluteFillElement style={{ overflow: "hidden" }}>
       {/* Background image with subtle zoom */}
-      <Img
+      <ImgElement
         src={resolveAsset(src)}
         style={{
           width: "100%",
@@ -517,14 +533,14 @@ const BackgroundImageLayer: React.FC<{
         }}
       />
       {/* Dark overlay for readability */}
-      <AbsoluteFill
+      <AbsoluteFillElement
         style={{
           background: `rgba(15, 23, 42, ${overlayOpacity})`,
         }}
       />
       {/* Component content on top */}
       {children}
-    </AbsoluteFill>
+    </AbsoluteFillElement>
   );
 };
 
@@ -538,9 +554,9 @@ const BackgroundVideoLayer: React.FC<{
   const { fps } = useVideoConfig();
 
   return (
-    <AbsoluteFill style={{ overflow: "hidden" }}>
+    <AbsoluteFillElement style={{ overflow: "hidden" }}>
       {/* Background video */}
-      <OffthreadVideo
+      <OffthreadVideoElement
         src={resolveAsset(src)}
         startFrom={Math.round(startFrom * fps)}
         style={{
@@ -551,14 +567,14 @@ const BackgroundVideoLayer: React.FC<{
         muted
       />
       {/* Dark overlay for readability */}
-      <AbsoluteFill
+      <AbsoluteFillElement
         style={{
           background: `rgba(15, 23, 42, ${overlayOpacity})`,
         }}
       />
       {/* Component content on top */}
       {children}
-    </AbsoluteFill>
+    </AbsoluteFillElement>
   );
 };
 
@@ -646,7 +662,25 @@ const SceneRenderer: React.FC<{ cut: Cut; theme: ThemeConfig }> = ({ cut, theme 
         steps={cut.steps as TerminalStep[]}
         prompt={cut.prompt}
         accentColor={accent}
-        backgroundColor={bgColor || theme.backgroundColor}
+        backgroundColor={cut.backgroundImage ? "transparent" : (bgColor || theme.backgroundColor)}
+      />
+    );
+  }
+  if (cut.type === "midjourney_discord") {
+    return (
+      <MidjourneyDiscordScene
+        promptText={cut.text}
+        quadrants={cut.quadrants as any}
+        accentColor={accent}
+      />
+    );
+  }
+  if (cut.type === "midjourney_web") {
+    return (
+      <MidjourneyWebScene
+        title={cut.title}
+        images={cut.images as any}
+        accentColor={accent}
       />
     );
   }
@@ -658,6 +692,29 @@ const SceneRenderer: React.FC<{ cut: Cut; theme: ThemeConfig }> = ({ cut, theme 
         steps={cut.screenshotSteps as ScreenshotStep[]}
         accentColor={accent}
         cursorStartAt={cut.cursorStartAt}
+      />
+    );
+  }
+  if (cut.type === "action_checklist" && cut.tasks) {
+    return maybeWrapWithBg(
+      <ActionChecklist
+        title={cut.title}
+        subtitle={cut.subtitle}
+        tasks={cut.tasks}
+        accentColor={accent}
+        textColor={textColor}
+        backgroundColor={bgColor}
+      />
+    );
+  }
+  if (cut.type === "title_takeover" && cut.title) {
+    return maybeWrapWithBg(
+      <TitleTakeover
+        title={cut.title}
+        supportingLine={cut.supportingLine || cut.subtitle}
+        badge={cut.badge}
+        accentColor={accent}
+        textColor={textColor}
       />
     );
   }
@@ -707,7 +764,7 @@ const SceneRenderer: React.FC<{ cut: Cut; theme: ThemeConfig }> = ({ cut, theme 
   }
   if (cut.type === "progress_bar" && cut.progress !== undefined) {
     return maybeWrapWithBg(
-      <AbsoluteFill
+      <AbsoluteFillElement
         style={{
           background: bgColor || theme.surfaceColor,
           display: "flex", alignItems: "center", justifyContent: "center",
@@ -728,7 +785,7 @@ const SceneRenderer: React.FC<{ cut: Cut; theme: ThemeConfig }> = ({ cut, theme 
           animationStyle={(cut.progressAnimation as any) || "fill"}
           segments={cut.progressSegments} backgroundColor={cut.backgroundColor || theme.surfaceColor}
         />
-      </AbsoluteFill>
+      </AbsoluteFillElement>
     );
   }
 
@@ -777,8 +834,8 @@ const SceneRenderer: React.FC<{ cut: Cut; theme: ThemeConfig }> = ({ cut, theme 
     return maybeWrapWithBg(<ImageScene src={cut.source} animation={animation} />);
   }
 
-  // No source, no type — render as text card with cut id as fallback
-  return <TextCard text={cut.text || cut.id} color={textColor} backgroundColor={bgColor} />;
+  // No source, no type — render as text card only if text exists
+  return cut.text ? <TextCard text={cut.text} color={textColor} backgroundColor={bgColor} /> : null;
 };
 
 // ---------------------------------------------------------------------------
@@ -836,7 +893,7 @@ const OverlayRenderer: React.FC<{ overlay: Overlay; theme: ThemeConfig }> = ({
   }
   if (overlay.type === "comparison" && overlay.leftLabel && overlay.rightLabel) {
     return (
-      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", pointerEvents: "none", zIndex: 30 }}>
+      <AbsoluteFillElement style={{ justifyContent: "center", alignItems: "center", pointerEvents: "none", zIndex: 30 }}>
         <div style={{ maxWidth: 960, transform: "scale(0.88)" }}>
           <ComparisonCard
             title={overlay.title}
@@ -848,12 +905,12 @@ const OverlayRenderer: React.FC<{ overlay: Overlay; theme: ThemeConfig }> = ({
             textColor={theme.textColor}
           />
         </div>
-      </AbsoluteFill>
+      </AbsoluteFillElement>
     );
   }
   if (overlay.type === "callout" && overlay.text) {
     return (
-      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", pointerEvents: "none", zIndex: 30 }}>
+      <AbsoluteFillElement style={{ justifyContent: "center", alignItems: "center", pointerEvents: "none", zIndex: 30 }}>
         <div style={{ maxWidth: 840, transform: "scale(0.92)" }}>
           <CalloutBox
             text={overlay.text}
@@ -864,12 +921,12 @@ const OverlayRenderer: React.FC<{ overlay: Overlay; theme: ThemeConfig }> = ({
             textColor={theme.textColor}
           />
         </div>
-      </AbsoluteFill>
+      </AbsoluteFillElement>
     );
   }
   if (overlay.type === "stat_card" && overlay.text) {
     return (
-      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", pointerEvents: "none", zIndex: 30 }}>
+      <AbsoluteFillElement style={{ justifyContent: "center", alignItems: "center", pointerEvents: "none", zIndex: 30 }}>
         <div style={{ maxWidth: 760, transform: "scale(0.9)" }}>
           <StatCard
             stat={overlay.text}
@@ -878,7 +935,7 @@ const OverlayRenderer: React.FC<{ overlay: Overlay; theme: ThemeConfig }> = ({
             backgroundColor="rgba(15, 26, 36, 0.90)"
           />
         </div>
-      </AbsoluteFill>
+      </AbsoluteFillElement>
     );
   }
   return null;
@@ -896,7 +953,7 @@ export const Explainer: React.FC<ExplainerProps> = (props) => {
   const theme = resolveTheme(props as Record<string, unknown>);
 
   return (
-    <AbsoluteFill style={{ background: theme.backgroundColor, fontFamily: theme.headingFont || fontFamily }}>
+    <AbsoluteFillElement style={{ background: theme.backgroundColor, fontFamily: theme.headingFont || fontFamily }}>
       {/* Layer 0: Animated gradient background — driven by theme */}
       <AnimatedBackground theme={theme} />
 
@@ -906,9 +963,9 @@ export const Explainer: React.FC<ExplainerProps> = (props) => {
         const duration = Math.round((cut.out_seconds - cut.in_seconds) * fps);
 
         return (
-          <Sequence key={cut.id} from={from} durationInFrames={duration}>
+          <SequenceElement key={cut.id} from={from} durationInFrames={duration}>
             <SceneRenderer cut={cut} theme={theme} />
-          </Sequence>
+          </SequenceElement>
         );
       })}
 
@@ -920,9 +977,9 @@ export const Explainer: React.FC<ExplainerProps> = (props) => {
         );
 
         return (
-          <Sequence key={`overlay-${i}`} from={from} durationInFrames={duration}>
+          <SequenceElement key={`overlay-${i}`} from={from} durationInFrames={duration}>
             <OverlayRenderer overlay={overlay} theme={theme} />
-          </Sequence>
+          </SequenceElement>
         );
       })}
 
@@ -940,17 +997,17 @@ export const Explainer: React.FC<ExplainerProps> = (props) => {
 
       {/* Layer 4: Audio — narration */}
       {audio?.narration?.src && (
-        <Audio src={resolveAsset(audio.narration.src)} volume={audio.narration.volume ?? 1} />
+        <AudioElement src={resolveAsset(audio.narration.src)} volume={audio.narration.volume ?? 1} />
       )}
 
       {/* Layer 4: Audio — music with offset, fade in/out, and optional loop */}
       {audio?.music?.src && (
-        <Audio
+        <AudioElement
           src={resolveAsset(audio.music.src)}
           startFrom={Math.round((audio.music.offsetSeconds ?? 0) * fps)}
           loop={audio.music.loop ?? false}
           loopVolumeCurveBehavior="repeat"
-          volume={(f) => {
+          volume={(f: number) => {
             const baseVol = audio.music!.volume ?? 0.1;
             const fadeInDur = (audio.music!.fadeInSeconds ?? 2) * fps;
             const fadeOutDur = (audio.music!.fadeOutSeconds ?? 3) * fps;
@@ -972,6 +1029,6 @@ export const Explainer: React.FC<ExplainerProps> = (props) => {
           }}
         />
       )}
-    </AbsoluteFill>
+    </AbsoluteFillElement>
   );
 };

@@ -88,8 +88,10 @@ export const PieChart: React.FC<PieChartProps> = ({
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
+  const Container = AbsoluteFill as any;
+
   return (
-    <AbsoluteFill
+    <Container
       style={{
         background: backgroundColor,
         justifyContent: "flex-start",
@@ -297,7 +299,7 @@ export const PieChart: React.FC<PieChartProps> = ({
           </g>
         )}
       </svg>
-    </AbsoluteFill>
+    </Container>
   );
 };
 

@@ -13,7 +13,14 @@ export { AnimeScene } from "./AnimeScene";
 export { TerminalScene } from "./TerminalScene";
 export { ScreenshotScene } from "./ScreenshotScene";
 export { ProviderChip } from "./ProviderChip";
+export { MidjourneyDiscordScene } from "./MidjourneyDiscordScene";
+export { MidjourneyWebScene } from "./MidjourneyWebScene";
+export { ActionChecklist } from "./ActionChecklist";
+export { TitleTakeover } from "./TitleTakeover";
+export { CompanySpotlight } from "./CompanySpotlight";
+export type { CompanySpotlightProps } from "./CompanySpotlight";
 export type { ParticleType } from "./ParticleOverlay";
 export type { CameraMotion, AnimeSceneProps } from "./AnimeScene";
 export type { TerminalStep } from "./TerminalScene";
 export type { ScreenshotStep, Region, Point } from "./ScreenshotScene";
+

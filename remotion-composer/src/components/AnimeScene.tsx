@@ -58,8 +58,11 @@ export interface AnimeSceneProps {
 // Cinematic vignette — slightly stronger than the Explainer default
 // ---------------------------------------------------------------------------
 
+const Container = AbsoluteFill as any;
+const ImgElement = Img as any;
+
 const AnimeVignette: React.FC = () => (
-  <AbsoluteFill
+  <Container
     style={{
       background:
         "radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.6) 100%)",
@@ -241,11 +244,11 @@ export const AnimeScene: React.FC<AnimeSceneProps> = ({
       : 0;
 
   return (
-    <AbsoluteFill style={{ overflow: "hidden", background: backgroundColor }}>
+    <Container style={{ overflow: "hidden", background: backgroundColor }}>
       {/* Layer 1: Image stack with crossfade + camera motion */}
       {images.map((src, i) => (
-        <AbsoluteFill key={i}>
-          <Img
+        <Container key={i}>
+          <ImgElement
             src={resolveAsset(src)}
             style={{
               width: "100%",
@@ -256,12 +259,12 @@ export const AnimeScene: React.FC<AnimeSceneProps> = ({
               willChange: "transform, opacity",
             }}
           />
-        </AbsoluteFill>
+        </Container>
       ))}
 
       {/* Layer 2: Animated lighting gradient */}
       {lightingFrom && lightingTo && (
-        <AbsoluteFill
+        <Container
           style={{
             background: `linear-gradient(135deg, ${lightingFrom}, ${lightingTo})`,
             opacity: lightOpacity,
@@ -282,6 +285,6 @@ export const AnimeScene: React.FC<AnimeSceneProps> = ({
           intensity={particleIntensity}
         />
       )}
-    </AbsoluteFill>
+    </Container>
   );
 };

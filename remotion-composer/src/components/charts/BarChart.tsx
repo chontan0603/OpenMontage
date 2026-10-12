@@ -4,27 +4,38 @@ import {
   spring,
   useCurrentFrame,
   useVideoConfig,
+  Img,
 } from "remotion";
+import { resolveAsset } from "../../lib/resolveAsset";
 
-interface BarDatum {
+export interface BarDatum {
   label: string;
   value: number;
+  delaySeconds?: number;
+  logoUrl?: string;
+  logoSize?: number;
+  subLabel?: string;
+  color?: string;
 }
 
 type BarAnimationStyle = "grow-up" | "slide-in" | "pop";
 
-interface BarChartProps {
+export interface BarChartProps {
   data: BarDatum[];
   title?: string;
   colors?: string[];
   fontFamily?: string;
   textColor?: string;
   backgroundColor?: string;
+  bgImage?: string;
+  overlayOpacity?: number;
   gridColor?: string;
   showGrid?: boolean;
   showValues?: boolean;
   animationStyle?: BarAnimationStyle;
   barGap?: number;
+  valuePrefix?: string;
+  valueSuffix?: string;
 }
 
 export const BarChart: React.FC<BarChartProps> = ({
@@ -32,13 +43,17 @@ export const BarChart: React.FC<BarChartProps> = ({
   title,
   colors = ["#2563EB", "#F59E0B", "#10B981", "#EC4899", "#06B6D4", "#8B5CF6"],
   fontFamily = "Inter, system-ui, sans-serif",
-  textColor = "#1F2937",
-  backgroundColor = "#FFFFFF",
-  gridColor = "#E5E7EB",
+  textColor = "#F8FAFC",
+  backgroundColor = "#0B0F19",
+  bgImage,
+  overlayOpacity = 0.75,
+  gridColor = "#334155",
   showGrid = true,
   showValues = true,
   animationStyle = "grow-up",
-  barGap = 12,
+  barGap = 16,
+  valuePrefix = "",
+  valueSuffix = "",
 }) => {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
@@ -48,8 +63,8 @@ export const BarChart: React.FC<BarChartProps> = ({
   // Chart layout constants (within 1920x1080 canvas)
   const chartLeft = 140;
   const chartRight = 1780;
-  const chartTop = title ? 160 : 80;
-  const chartBottom = 920;
+  const chartTop = title ? 170 : 100;
+  const chartBottom = 880;
   const chartWidth = chartRight - chartLeft;
   const chartHeight = chartBottom - chartTop;
 
@@ -57,7 +72,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   const totalGap = barGap * (barCount + 1);
   const barWidth = Math.min(
     (chartWidth - totalGap) / barCount,
-    120
+    130
   );
   const actualTotalWidth = barCount * barWidth + (barCount + 1) * barGap;
   const offsetX = chartLeft + (chartWidth - actualTotalWidth) / 2;
@@ -70,18 +85,59 @@ export const BarChart: React.FC<BarChartProps> = ({
     return { value, y };
   });
 
+  const Container = AbsoluteFill as any;
+  const ImgElement = Img as any;
+
   return (
-    <AbsoluteFill
+    <Container
       style={{
         background: backgroundColor,
         justifyContent: "flex-start",
         alignItems: "center",
         padding: 40,
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Authentic B-Roll Background (if provided) */}
+      {bgImage && (
+        <>
+          <ImgElement
+            src={resolveAsset(bgImage)}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              transform: `scale(${interpolate(
+                frame,
+                [0, durationInFrames],
+                [1.0, 1.06],
+                { extrapolateRight: "clamp" }
+              )})`,
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              background: `radial-gradient(circle at center, rgba(15, 23, 42, ${Math.max(
+                overlayOpacity - 0.15,
+                0.4
+              )}) 0%, rgba(10, 15, 29, ${overlayOpacity}) 100%)`,
+            }}
+          />
+        </>
+      )}
+
       <svg
         viewBox="0 0 1920 1080"
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", position: "relative", zIndex: 2 }}
       >
         {/* Title */}
         {title && (
@@ -91,8 +147,9 @@ export const BarChart: React.FC<BarChartProps> = ({
             textAnchor="middle"
             fill={textColor}
             fontFamily={fontFamily}
-            fontWeight={700}
-            fontSize={48}
+            fontWeight={800}
+            fontSize={52}
+            letterSpacing="-0.02em"
             opacity={spring({ frame, fps, config: { damping: 20 } })}
           >
             {title}
@@ -105,7 +162,7 @@ export const BarChart: React.FC<BarChartProps> = ({
             const gridOpacity = interpolate(
               frame,
               [0, 10],
-              [0, 0.6],
+              [0, 0.45],
               { extrapolateRight: "clamp" }
             );
             return (
@@ -117,19 +174,20 @@ export const BarChart: React.FC<BarChartProps> = ({
                   y2={line.y}
                   stroke={gridColor}
                   strokeWidth={1}
+                  strokeDasharray="4 4"
                   opacity={gridOpacity}
                 />
                 <text
-                  x={chartLeft - 12}
-                  y={line.y + 5}
+                  x={chartLeft - 16}
+                  y={line.y + 6}
                   textAnchor="end"
                   fill={textColor}
                   fontFamily={fontFamily}
-                  fontWeight={400}
+                  fontWeight={500}
                   fontSize={20}
                   opacity={gridOpacity}
                 >
-                  {formatNumber(line.value)}
+                  {valuePrefix}{formatNumber(line.value)}{valueSuffix}
                 </text>
               </g>
             );
@@ -159,59 +217,69 @@ export const BarChart: React.FC<BarChartProps> = ({
           })}
         />
 
-        {/* Bars */}
+        {/* Bars with Staggered Rise & Logo-Over-Bar dynamics */}
         {data.map((datum, i) => {
-          const color = colors[i % colors.length];
+          const color = datum.color || colors[i % colors.length];
           const barX = offsetX + barGap + i * (barWidth + barGap);
           const barHeightFull = (datum.value / maxValue) * chartHeight;
-          const staggerDelay = i * 4;
+          const staggerDelay = datum.delaySeconds != null
+            ? Math.round(datum.delaySeconds * fps)
+            : i * 5;
 
-          let barProgress: number;
-          let barOpacity: number;
+          let barProgress = 0;
+          let barOpacity = 0;
 
-          if (animationStyle === "grow-up") {
-            barProgress = spring({
-              frame: frame - staggerDelay,
-              fps,
-              config: { damping: 14, stiffness: 80 },
-            });
-            barOpacity = interpolate(
-              frame,
-              [staggerDelay, staggerDelay + 6],
-              [0, 1],
-              { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-            );
-          } else if (animationStyle === "slide-in") {
-            barProgress = interpolate(
-              frame,
-              [staggerDelay + 5, staggerDelay + 25],
-              [0, 1],
-              { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-            );
-            barOpacity = interpolate(
-              frame,
-              [staggerDelay + 5, staggerDelay + 12],
-              [0, 1],
-              { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-            );
-          } else {
-            // pop
-            const s = spring({
-              frame: frame - staggerDelay,
-              fps,
-              config: { damping: 8, stiffness: 150, mass: 0.6 },
-            });
-            barProgress = s;
-            barOpacity = interpolate(
-              frame,
-              [staggerDelay, staggerDelay + 3],
-              [0, 1],
-              { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-            );
+          if (frame >= staggerDelay) {
+            if (animationStyle === "grow-up") {
+              barProgress = spring({
+                frame: frame - staggerDelay,
+                fps,
+                config: { damping: 14, stiffness: 80 },
+              });
+              barOpacity = interpolate(
+                frame,
+                [staggerDelay, staggerDelay + 6],
+                [0, 1],
+                { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+              );
+            } else if (animationStyle === "slide-in") {
+              barProgress = interpolate(
+                frame,
+                [staggerDelay + 5, staggerDelay + 25],
+                [0, 1],
+                { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+              );
+              barOpacity = interpolate(
+                frame,
+                [staggerDelay + 5, staggerDelay + 12],
+                [0, 1],
+                { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+              );
+            } else {
+              // pop
+              const s = spring({
+                frame: frame - staggerDelay,
+                fps,
+                config: { damping: 8, stiffness: 150, mass: 0.6 },
+              });
+              barProgress = s;
+              barOpacity = interpolate(
+                frame,
+                [staggerDelay, staggerDelay + 3],
+                [0, 1],
+                { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+              );
+            }
           }
 
           const animatedHeight = barHeightFull * barProgress;
           const barY = chartBottom - animatedHeight;
+
+          // Logo-over-bar positioning
+          const hasLogo = Boolean(datum.logoUrl);
+          const logoSize = datum.logoSize || Math.min(barWidth * 0.72, 48);
+          const logoBadgeY = barY - logoSize - 12;
+          const valueY = hasLogo ? logoBadgeY - 14 : barY - 14;
 
           // Fade out near end
           const fadeOut = interpolate(
@@ -230,49 +298,90 @@ export const BarChart: React.FC<BarChartProps> = ({
                 width={barWidth}
                 height={Math.max(animatedHeight, 0)}
                 fill={color}
-                rx={4}
+                rx={6}
                 opacity={barOpacity}
               />
+
+              {/* Company Logo Badge Riding On Top Of Bar */}
+              {hasLogo && datum.logoUrl && (
+                <g opacity={barOpacity}>
+                  <rect
+                    x={barX + (barWidth - logoSize) / 2 - 4}
+                    y={logoBadgeY - 4}
+                    width={logoSize + 8}
+                    height={logoSize + 8}
+                    rx={8}
+                    fill="#0F172A"
+                    stroke={color}
+                    strokeWidth={2}
+                    opacity={barProgress > 0.1 ? 1 : 0}
+                  />
+                  <image
+                    href={resolveAsset(datum.logoUrl)}
+                    x={barX + (barWidth - logoSize) / 2}
+                    y={logoBadgeY}
+                    width={logoSize}
+                    height={logoSize}
+                    preserveAspectRatio="xMidYMid meet"
+                  />
+                </g>
+              )}
 
               {/* Value label */}
               {showValues && (
                 <text
                   x={barX + barWidth / 2}
-                  y={barY - 12}
+                  y={valueY}
                   textAnchor="middle"
                   fill={textColor}
                   fontFamily={fontFamily}
-                  fontWeight={600}
-                  fontSize={22}
+                  fontWeight={700}
+                  fontSize={24}
                   opacity={interpolate(
                     barProgress,
-                    [0.7, 1],
+                    [0.6, 1],
                     [0, 1],
                     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
                   )}
                 >
-                  {formatNumber(datum.value)}
+                  {valuePrefix}{formatNumber(datum.value)}{valueSuffix}
                 </text>
               )}
 
-              {/* Label */}
+              {/* Company / Founder Label below axis */}
               <text
                 x={barX + barWidth / 2}
                 y={chartBottom + 40}
                 textAnchor="middle"
                 fill={textColor}
                 fontFamily={fontFamily}
-                fontWeight={500}
-                fontSize={20}
+                fontWeight={600}
+                fontSize={22}
                 opacity={barOpacity}
               >
                 {datum.label}
               </text>
+
+              {/* Optional sublabel below name (e.g. market share or subtitle) */}
+              {datum.subLabel && (
+                <text
+                  x={barX + barWidth / 2}
+                  y={chartBottom + 68}
+                  textAnchor="middle"
+                  fill="#94A3B8"
+                  fontFamily={fontFamily}
+                  fontWeight={400}
+                  fontSize={16}
+                  opacity={barOpacity}
+                >
+                  {datum.subLabel}
+                </text>
+              )}
             </g>
           );
         })}
       </svg>
-    </AbsoluteFill>
+    </Container>
   );
 };
 
@@ -282,3 +391,4 @@ function formatNumber(n: number): string {
   if (Number.isInteger(n)) return String(n);
   return n.toFixed(1);
 }
+

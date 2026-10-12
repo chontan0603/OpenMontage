@@ -1,0 +1,139 @@
+{
+  "theme": "flat-motion-graphics",
+  "cuts": [
+    {
+      "id": "c1_hook",
+      "source": "",
+      "type": "hero_title",
+      "in_seconds": 0,
+      "out_seconds": 7.0,
+      "text": "1 DEVELOPER VS 20-PERSON TEAM",
+      "heroSubtitle": "Why do you waste 20 hours writing code before you see how 3 agents built my startup in 24 hours?",
+      "accentColor": "#22D3EE",
+      "backgroundColor": "#0F172A"
+    },
+    {
+      "id": "c2_terminal_proof",
+      "source": "",
+      "type": "terminal_scene",
+      "in_seconds": 7.0,
+      "out_seconds": 18.0,
+      "terminalTitle": "autonomous-swarm // main",
+      "prompt": "$",
+      "accentColor": "#34D399",
+      "backgroundColor": "#0F172A",
+      "steps": [
+        { "kind": "cmd", "text": "git log --oneline -n 4", "typeSpeed": 0.04, "holdSeconds": 0.8 },
+        { "kind": "out", "text": "7f2a1b9 feat(api): stripe webhook & db migrations [agent-1]", "holdSeconds": 0.6 },
+        { "kind": "out", "text": "4c9d0e2 feat(auth): session verification & JWT [agent-2]", "holdSeconds": 0.6 },
+        { "kind": "out", "text": "1a8b3c4 feat(ui): dashboard analytics components [agent-3]", "holdSeconds": 0.6 },
+        { "kind": "out", "text": "9e4f5a1 test: full end-to-end suite passing (48/48)", "holdSeconds": 0.8 },
+        { "kind": "pill", "text": "48 COMMITS MERGED | 0% HUMAN CODE", "color": "#34D399", "durationSeconds": 3.5 }
+      ]
+    },
+    {
+      "id": "c3_supervisor",
+      "source": "",
+      "type": "callout",
+      "in_seconds": 18.0,
+      "out_seconds": 31.0,
+      "title": "THE SUPERVISOR PATTERN",
+      "callout_type": "info",
+      "text": "Most people use AI like a search engine: prompt, wait, copy-paste. The breakthrough is the Supervisor Pattern: one executive agent breaks your roadmap into phases and leases specialized worker subagents to execute them.",
+      "accentColor": "#A78BFA",
+      "backgroundColor": "#0F172A",
+      "color": "#F8FAFC"
+    },
+    {
+      "id": "c4_self_heal",
+      "source": "",
+      "type": "terminal_scene",
+      "in_seconds": 31.0,
+      "out_seconds": 42.0,
+      "terminalTitle": "self-healing-loop // test-runner",
+      "prompt": "$",
+      "accentColor": "#F59E0B",
+      "backgroundColor": "#0F172A",
+      "steps": [
+        { "kind": "cmd", "text": "pytest tests/test_billing.py", "typeSpeed": 0.04, "holdSeconds": 0.8 },
+        { "kind": "out", "text": "FAILED tests/test_billing.py::test_webhook - ConnectionError", "holdSeconds": 0.8 },
+        { "kind": "pill", "text": "AGENT DIAGNOSING ERROR & WRITING PATCH...", "color": "#F59E0B", "durationSeconds": 2.5 },
+        { "kind": "out", "text": "PATCH APPLIED: updated mock endpoint & timeout config", "holdSeconds": 0.8 },
+        { "kind": "cmd", "text": "pytest tests/test_billing.py", "typeSpeed": 0.04, "holdSeconds": 0.8 },
+        { "kind": "pill", "text": "48 PASSED in 1.42s [ZERO HUMAN INTERVENTION]", "color": "#34D399", "durationSeconds": 3.0 }
+      ]
+    },
+    {
+      "id": "c5_economics",
+      "source": "",
+      "type": "comparison",
+      "in_seconds": 42.0,
+      "out_seconds": 54.0,
+      "title": "ENGINEERING BURN VS AGENT SWARM",
+      "leftLabel": "20-Person Tech Team",
+      "leftValue": "$2,000,000 / yr",
+      "rightLabel": "Autonomous Agent Swarm",
+      "rightValue": "$14.20 Tokens",
+      "accentColor": "#22D3EE",
+      "backgroundColor": "#0F172A",
+      "color": "#F8FAFC"
+    },
+    {
+      "id": "c6_leverage",
+      "source": "",
+      "type": "kpi_grid",
+      "in_seconds": 54.0,
+      "out_seconds": 64.0,
+      "title": "SOLO BUILDER LEVERAGE MULTIPLIER",
+      "chartData": [
+        { "label": "Leverage Multiplier", "value": 10000, "change": 100, "suffix": "x" },
+        { "label": "Human Code Written", "value": 0, "change": -100, "suffix": " lines" },
+        { "label": "Development Time", "value": 24, "change": -95, "suffix": " hrs" }
+      ],
+      "columns": 3,
+      "chartColors": ["#22D3EE", "#34D399", "#A78BFA"],
+      "chartAnimation": "cascade",
+      "backgroundColor": "#0F172A"
+    }
+  ],
+  "overlays": [
+    {
+      "type": "section_title",
+      "in_seconds": 0.5,
+      "out_seconds": 6.5,
+      "text": "AUTONOMOUS AGENTS",
+      "subtitle": "24-Hour Loop Experiment",
+      "accentColor": "#22D3EE"
+    },
+    {
+      "type": "stat_reveal",
+      "in_seconds": 19.0,
+      "out_seconds": 29.0,
+      "text": "100%",
+      "subtitle": "Autonomous Delegation",
+      "accentColor": "#34D399",
+      "position": "bottom-right"
+    },
+    {
+      "type": "stat_reveal",
+      "in_seconds": 55.0,
+      "out_seconds": 63.0,
+      "text": "10,000x",
+      "subtitle": "Leverage Multiplier",
+      "accentColor": "#A78BFA",
+      "position": "bottom-right"
+    }
+  ],
+  "audio": {
+    "narration": {
+      "src": "agent_outpaced_20_person_team/narration_full.mp3",
+      "volume": 1.0
+    },
+    "music": {
+      "src": "agent_outpaced_20_person_team/music.mp3",
+      "volume": 0.12,
+      "loop": true
+    }
+  },
+  "captions": []
+}

@@ -35,8 +35,33 @@ def service_account_configured() -> bool:
     return bool(path and os.path.exists(path))
 
 
+def _ensure_env_loaded() -> None:
+    """Ensure environment variables are populated from .env or .secrets."""
+    if not os.environ.get("GOOGLE_API_KEY") and not os.environ.get("GEMINI_API_KEY"):
+        try:
+            from dotenv import load_dotenv
+            load_dotenv()
+            # Also check parent directory
+            load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+        except Exception:
+            pass
+
+    if not os.environ.get("GOOGLE_API_KEY") and not os.environ.get("GEMINI_API_KEY"):
+        secrets_file = os.path.expanduser("~/.secrets/gemini_keys.txt")
+        if os.path.exists(secrets_file):
+            try:
+                with open(secrets_file, "r", encoding="utf-8") as f:
+                    keys = [l.strip() for l in f if l.strip() and not l.startswith("#")]
+                    if keys:
+                        os.environ["GEMINI_API_KEY"] = keys[0]
+                        os.environ["GOOGLE_API_KEY"] = keys[0]
+            except Exception:
+                pass
+
+
 def has_google_credentials() -> bool:
     """True when GOOGLE_API_KEY, GEMINI_API_KEY, or service account is configured."""
+    _ensure_env_loaded()
     return bool(
         os.environ.get("GOOGLE_API_KEY")
         or os.environ.get("GEMINI_API_KEY")
@@ -55,6 +80,7 @@ def get_genai_client(
     """
     from google import genai
 
+    _ensure_env_loaded()
     api_key = os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY")
     use_vertex = os.environ.get("GOOGLE_GENAI_USE_VERTEXAI", "").lower() in (
         "true",
@@ -105,9 +131,11 @@ def get_access_token(scopes: list[str] | None = None) -> tuple[str, str | None]:
         scopes = [CLOUD_PLATFORM_SCOPE]
 
     try:
-        from google.auth.transport.requests import Request
-        from google.oauth2 import service_account
-    except ImportError as exc:  # pragma: no cover - depends on optional dep
+        import importlib
+
+        Request = importlib.import_module("google.auth.transport.requests").Request
+        service_account = importlib.import_module("google.oauth2.service_account")
+    except (ImportError, ModuleNotFoundError) as exc:  # pragma: no cover - depends on optional dep
         raise RuntimeError(
             "Service-account auth requires the 'google-auth' package. "
             "Install it with: pip install google-auth"

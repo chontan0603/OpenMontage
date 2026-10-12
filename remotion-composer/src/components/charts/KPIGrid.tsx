@@ -6,13 +6,14 @@ import {
   useVideoConfig,
 } from "remotion";
 
-interface Metric {
+export interface Metric {
   label: string;
-  value: number;
+  value: number | string;
   prefix?: string;
   suffix?: string;
-  change?: number; // percentage change, positive = up, negative = down
-  icon?: string; // emoji or text glyph
+  change?: number | string;
+  unit?: string;
+  icon?: string;
 }
 
 type KPIAnimationStyle = "count-up" | "pop" | "cascade";
@@ -32,51 +33,49 @@ interface KPIGridProps {
 }
 
 export const KPIGrid: React.FC<KPIGridProps> = ({
-  metrics,
+  metrics = [],
   title,
-  columns = 3,
-  colors = ["#2563EB", "#F59E0B", "#10B981", "#EC4899"],
-  fontFamily = "Inter, system-ui, sans-serif",
-  textColor = "#1F2937",
-  backgroundColor = "#FFFFFF",
-  cardBackgroundColor = "#F9FAFB",
+  columns = 4,
+  colors = ["#EC4899", "#7C3AED", "#06B6D4", "#F59E0B"],
+  fontFamily = "Space Grotesk, Inter, system-ui, sans-serif",
+  textColor = "#F8FAFC",
+  backgroundColor = "transparent",
+  cardBackgroundColor = "#1E293B",
   positiveColor = "#10B981",
   negativeColor = "#EF4444",
-  animationStyle = "count-up",
+  animationStyle = "pop",
 }) => {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
 
-  const cols = Math.min(columns, metrics.length);
+  const cols = Math.min(columns, metrics.length || 1);
   const rows = Math.ceil(metrics.length / cols);
 
-  // Grid layout constants (within 1920x1080)
-  const gridPadding = 100;
-  const cardGap = 28;
-  const titleHeight = title ? 120 : 0;
-  const gridTop = 80 + titleHeight;
+  // Layout calculations
+  const gridPadding = 80;
+  const cardGap = 24;
+  const titleHeight = title ? 100 : 0;
+  const gridTop = 60 + titleHeight;
   const gridWidth = 1920 - gridPadding * 2;
-  const gridHeight = 1080 - gridTop - 80;
+  const gridHeight = 1080 - gridTop - 60;
   const cardWidth = (gridWidth - cardGap * (cols - 1)) / cols;
-  const cardHeight = Math.min(
-    (gridHeight - cardGap * (rows - 1)) / rows,
-    320
-  );
+  const cardHeight = Math.min((gridHeight - cardGap * (rows - 1)) / rows, 300);
 
-  // Center grid vertically
   const totalGridHeight = rows * cardHeight + (rows - 1) * cardGap;
   const gridTopOffset = gridTop + (gridHeight - totalGridHeight) / 2;
 
-  // Fade out near end
+  // Smooth fade-out near end of scene
   const fadeOut = interpolate(
     frame,
-    [durationInFrames - 15, durationInFrames],
+    [durationInFrames - 12, durationInFrames],
     [1, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
+  const Container = AbsoluteFill as any;
+
   return (
-    <AbsoluteFill
+    <Container
       style={{
         background: backgroundColor,
         justifyContent: "flex-start",
@@ -84,285 +83,157 @@ export const KPIGrid: React.FC<KPIGridProps> = ({
         fontFamily,
       }}
     >
-      {/* Title */}
+      {/* Grid Title */}
       {title && (
         <div
           style={{
             position: "absolute",
-            top: 60,
+            top: 50,
             left: 0,
             right: 0,
             textAlign: "center",
-            fontSize: 48,
-            fontWeight: 700,
+            fontSize: 44,
+            fontWeight: 800,
             color: textColor,
             fontFamily,
-            opacity:
-              spring({ frame, fps, config: { damping: 20 } }) * fadeOut,
+            letterSpacing: "-0.01em",
+            opacity: spring({ frame, fps, config: { damping: 18 } }) * fadeOut,
           }}
         >
           {title}
         </div>
       )}
 
-      {/* Cards */}
+      {/* KPI Cards */}
       {metrics.map((metric, idx) => {
         const col = idx % cols;
         const row = Math.floor(idx / cols);
         const left = gridPadding + col * (cardWidth + cardGap);
         const top = gridTopOffset + row * (cardHeight + cardGap);
         const accentColor = colors[idx % colors.length];
+        const delay = idx * 4;
 
-        const staggerDelay =
-          animationStyle === "cascade" ? idx * 5 : 0;
+        const cardSpring = spring({
+          frame: frame - delay,
+          fps,
+          config: { damping: 12, stiffness: 120 },
+        });
 
-        // Card entrance
-        let cardScale: number;
-        let cardOpacity: number;
-
-        if (animationStyle === "pop") {
-          cardScale = spring({
-            frame: frame - idx * 4,
-            fps,
-            config: { damping: 10, stiffness: 150, mass: 0.5 },
-            from: 0.7,
-            to: 1,
-          });
-          cardOpacity = interpolate(
-            frame,
-            [idx * 4, idx * 4 + 5],
-            [0, 1],
-            { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-          );
-        } else if (animationStyle === "cascade") {
-          cardScale = 1;
-          const slideY = interpolate(
-            frame,
-            [staggerDelay, staggerDelay + 15],
-            [30, 0],
-            { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-          );
-          cardOpacity = interpolate(
-            frame,
-            [staggerDelay, staggerDelay + 12],
-            [0, 1],
-            { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-          );
-          // We'll use slideY via transform below
-          return (
-            <div
-              key={metric.label}
-              style={{
-                position: "absolute",
-                left,
-                top,
-                width: cardWidth,
-                height: cardHeight,
-                backgroundColor: cardBackgroundColor,
-                borderRadius: 12,
-                borderLeft: `4px solid ${accentColor}`,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                padding: 24,
-                opacity: cardOpacity * fadeOut,
-                transform: `translateY(${slideY}px)`,
-                boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
-              }}
-            >
-              <KPICardContent
-                metric={metric}
-                accentColor={accentColor}
-                textColor={textColor}
-                fontFamily={fontFamily}
-                positiveColor={positiveColor}
-                negativeColor={negativeColor}
-                frame={frame}
-                fps={fps}
-                staggerDelay={staggerDelay}
-                animationStyle={animationStyle}
-              />
-            </div>
-          );
-        } else {
-          // count-up — no special card animation
-          cardScale = 1;
-          cardOpacity = spring({
-            frame: frame - idx * 3,
-            fps,
-            config: { damping: 20 },
-          });
-        }
+        const cardScale = interpolate(cardSpring, [0, 1], [0.85, 1]);
+        const cardOpacity = interpolate(cardSpring, [0, 1], [0, 1]);
 
         return (
           <div
-            key={metric.label}
+            key={metric.label || idx}
             style={{
               position: "absolute",
               left,
               top,
               width: cardWidth,
               height: cardHeight,
-              backgroundColor: cardBackgroundColor,
-              borderRadius: 12,
-              borderLeft: `4px solid ${accentColor}`,
+              backgroundColor: "rgba(30, 41, 59, 0.88)",
+              backdropFilter: "blur(12px)",
+              borderRadius: 16,
+              border: `1px solid rgba(255, 255, 255, 0.1)`,
+              borderTop: `4px solid ${accentColor}`,
+              boxShadow: `0 12px 32px rgba(0, 0, 0, 0.4), 0 0 20px ${accentColor}22`,
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              padding: 24,
+              padding: "24px 20px",
               opacity: cardOpacity * fadeOut,
-              transform: `scale(${cardScale})`,
-              boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+              transform: `scale(${cardScale}) translateY(${interpolate(
+                cardSpring,
+                [0, 1],
+                [20, 0]
+              )}px)`,
             }}
           >
-            <KPICardContent
-              metric={metric}
-              accentColor={accentColor}
-              textColor={textColor}
-              fontFamily={fontFamily}
-              positiveColor={positiveColor}
-              negativeColor={negativeColor}
-              frame={frame}
-              fps={fps}
-              staggerDelay={idx * 3}
-              animationStyle={animationStyle}
-            />
+            {/* Value Display */}
+            <div
+              style={{
+                fontSize: 54,
+                fontWeight: 800,
+                color: accentColor,
+                fontFamily,
+                lineHeight: 1.1,
+                textAlign: "center",
+                textShadow: `0 0 24px ${accentColor}44`,
+              }}
+            >
+              {metric.prefix || ""}
+              {String(metric.value)}
+              {metric.suffix || ""}
+            </div>
+
+            {/* Metric Label */}
+            <div
+              style={{
+                fontSize: 22,
+                fontWeight: 600,
+                color: "#F8FAFC",
+                fontFamily,
+                marginTop: 12,
+                textAlign: "center",
+                lineHeight: 1.25,
+              }}
+            >
+              {metric.label}
+            </div>
+
+            {/* Unit / Subtitle */}
+            {metric.unit && (
+              <div
+                style={{
+                  fontSize: 15,
+                  fontWeight: 400,
+                  color: "#94A3B8",
+                  fontFamily,
+                  marginTop: 4,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                }}
+              >
+                {metric.unit}
+              </div>
+            )}
+
+            {/* Change Indicator / Pill Badge */}
+            {metric.change !== undefined && (
+              <div
+                style={{
+                  marginTop: 14,
+                  padding: "4px 12px",
+                  borderRadius: 20,
+                  backgroundColor: "rgba(255, 255, 255, 0.08)",
+                  border: `1px solid ${accentColor}44`,
+                  fontSize: 16,
+                  fontWeight: 600,
+                  color:
+                    String(metric.change).startsWith("+")
+                      ? positiveColor
+                      : String(metric.change).startsWith("-")
+                      ? negativeColor
+                      : "#E2E8F0",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 4,
+                }}
+              >
+                <span>
+                  {String(metric.change).startsWith("+")
+                    ? "▲"
+                    : String(metric.change).startsWith("-")
+                    ? "▼"
+                    : "•"}
+                </span>
+                <span>{String(metric.change)}</span>
+              </div>
+            )}
           </div>
         );
       })}
-    </AbsoluteFill>
+    </Container>
   );
 };
-
-interface KPICardContentProps {
-  metric: Metric;
-  accentColor: string;
-  textColor: string;
-  fontFamily: string;
-  positiveColor: string;
-  negativeColor: string;
-  frame: number;
-  fps: number;
-  staggerDelay: number;
-  animationStyle: KPIAnimationStyle;
-}
-
-const KPICardContent: React.FC<KPICardContentProps> = ({
-  metric,
-  accentColor,
-  textColor,
-  fontFamily,
-  positiveColor,
-  negativeColor,
-  frame,
-  fps,
-  staggerDelay,
-  animationStyle,
-}) => {
-  // Count-up animation
-  const countProgress =
-    animationStyle === "count-up"
-      ? spring({
-          frame: frame - staggerDelay - 5,
-          fps,
-          config: { damping: 22, stiffness: 40 },
-        })
-      : spring({
-          frame: frame - staggerDelay - 3,
-          fps,
-          config: { damping: 18, stiffness: 60 },
-        });
-
-  const displayValue = Math.round(metric.value * countProgress);
-  const formattedValue = formatDisplayValue(displayValue, metric.value);
-
-  // Change indicator animation
-  const changeOpacity = interpolate(
-    frame,
-    [staggerDelay + 18, staggerDelay + 25],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-
-  return (
-    <>
-      {/* Icon */}
-      {metric.icon && (
-        <div
-          style={{
-            fontSize: 36,
-            marginBottom: 8,
-          }}
-        >
-          {metric.icon}
-        </div>
-      )}
-
-      {/* Value */}
-      <div
-        style={{
-          fontSize: 56,
-          fontWeight: 800,
-          color: accentColor,
-          fontFamily,
-          lineHeight: 1.1,
-        }}
-      >
-        {metric.prefix || ""}
-        {formattedValue}
-        {metric.suffix || ""}
-      </div>
-
-      {/* Label */}
-      <div
-        style={{
-          fontSize: 22,
-          fontWeight: 500,
-          color: textColor,
-          fontFamily,
-          marginTop: 8,
-          opacity: 0.8,
-        }}
-      >
-        {metric.label}
-      </div>
-
-      {/* Change indicator */}
-      {metric.change !== undefined && metric.change !== 0 && (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 4,
-            marginTop: 10,
-            fontSize: 20,
-            fontWeight: 600,
-            fontFamily,
-            color: metric.change > 0 ? positiveColor : negativeColor,
-            opacity: changeOpacity,
-          }}
-        >
-          <span style={{ fontSize: 18 }}>
-            {metric.change > 0 ? "\u25B2" : "\u25BC"}
-          </span>
-          {Math.abs(metric.change).toFixed(1)}%
-        </div>
-      )}
-    </>
-  );
-};
-
-/**
- * Format the animated counter value to match the scale of the target value.
- */
-function formatDisplayValue(current: number, target: number): string {
-  if (target >= 1_000_000) {
-    return `${(current / 1_000_000).toFixed(1)}M`;
-  }
-  if (target >= 1_000) {
-    return `${(current / 1_000).toFixed(1)}K`;
-  }
-  return String(current);
-}

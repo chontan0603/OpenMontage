@@ -16,6 +16,8 @@ import { ProductReveal, ProductRevealProps } from "./components/ProductReveal";
 import { CaptionOverlay, WordCaption } from "./components/CaptionOverlay";
 import { CollageBurst, CollageBurstProps } from "./CollageBurst";
 import { LyricOverlay, LyricOverlayProps } from "./LyricOverlay";
+import { TechTheorySample } from "./TechTheorySample";
+
 
 // ---------------------------------------------------------------------------
 // Theme System — prevents every video from looking like dark fintech
@@ -330,6 +332,15 @@ export const Root: React.FC = () => {
           overlay: true,
         } as EndTagProps}
       />
+      <Composition
+        id="TechTheorySample"
+        component={TechTheorySample}
+        durationInFrames={1276}
+        fps={60}
+        width={1920}
+        height={1080}
+      />
     </>
   );
 };
+

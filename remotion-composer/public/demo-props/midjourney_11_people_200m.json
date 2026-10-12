@@ -1,0 +1,138 @@
+{
+  "theme": "flat-motion-graphics",
+  "cuts": [
+    {
+      "id": "c1_hook",
+      "source": "",
+      "type": "hero_title",
+      "in_seconds": 0,
+      "out_seconds": 14.7,
+      "text": "HOW MIDJOURNEY MAKES $200M WITH 11 PEOPLE",
+      "heroSubtitle": "Why do you waste millions on 500 engineers before seeing the most profitable company per employee in human history?",
+      "accentColor": "#22D3EE",
+      "backgroundColor": "#0F172A"
+    },
+    {
+      "id": "c2_discord",
+      "source": "",
+      "type": "terminal_scene",
+      "in_seconds": 14.7,
+      "out_seconds": 32.2,
+      "terminalTitle": "discord-api // bot-cluster",
+      "prompt": "/",
+      "accentColor": "#A78BFA",
+      "backgroundColor": "#0F172A",
+      "steps": [
+        { "kind": "cmd", "text": "imagine prompt: ultra-detailed cybernetic metropolis, octane render --v 6.0", "typeSpeed": 0.04, "holdSeconds": 1.0 },
+        { "kind": "pill", "text": "DISCORD TROJAN HORSE: ZERO WEBSITE UI", "color": "#A78BFA", "durationSeconds": 3.0 },
+        { "kind": "out", "text": "Job #849102 completed in 2.1s [Cloud GPU Cluster Alpha]", "holdSeconds": 0.8 },
+        { "kind": "out", "text": "Active Discord Community: 16,400,000+ members", "holdSeconds": 0.8 },
+        { "kind": "out", "text": "Marketing & Ad Spend: $0.00", "holdSeconds": 1.0 },
+        { "kind": "pill", "text": "100% ORGANIC VIRAL EXPANSION LOOP", "color": "#34D399", "durationSeconds": 3.0 }
+      ]
+    },
+    {
+      "id": "c3_core_team",
+      "source": "",
+      "type": "kpi_grid",
+      "in_seconds": 32.2,
+      "out_seconds": 52.8,
+      "title": "THE 11-PERSON CORE TEAM STRUCTURE",
+      "chartData": [
+        { "label": "Research Scientists", "value": 8, "suffix": " people" },
+        { "label": "Infrastructure Lead", "value": 1, "suffix": " person" },
+        { "label": "Finance & Legal", "value": 1, "suffix": " person" },
+        { "label": "Founder & Vision", "value": 1, "suffix": " person" }
+      ],
+      "columns": 4,
+      "chartColors": ["#22D3EE", "#34D399", "#A78BFA", "#F59E0B"],
+      "chartAnimation": "cascade",
+      "backgroundColor": "#0F172A"
+    },
+    {
+      "id": "c4_economics",
+      "source": "",
+      "type": "comparison",
+      "in_seconds": 52.8,
+      "out_seconds": 72.8,
+      "title": "HEADCOUNT BURNOUT VS LEAN POWER",
+      "leftLabel": "Adobe (Legacy Tech)",
+      "leftValue": "30,000 Employees | $2.4B Payroll",
+      "rightLabel": "Midjourney (AI Native)",
+      "rightValue": "11 Employees | $2.2M Payroll",
+      "accentColor": "#EC4899",
+      "backgroundColor": "#0F172A",
+      "color": "#F8FAFC"
+    },
+    {
+      "id": "c5_brooks_law",
+      "source": "",
+      "type": "callout",
+      "in_seconds": 72.8,
+      "out_seconds": 89.2,
+      "title": "BROOKS' LAW & THE HEADCOUNT TRAP",
+      "callout_type": "warning",
+      "text": "Adding manpower to a complex software project only delays it. Coordination tax, Jira overhead, and middle-management syncs kill engineering velocity. The modern AI founder scales autonomous loops, not employee headcount.",
+      "accentColor": "#F59E0B",
+      "backgroundColor": "#0F172A",
+      "color": "#F8FAFC"
+    },
+    {
+      "id": "c6_blueprint",
+      "source": "",
+      "type": "kpi_grid",
+      "in_seconds": 89.2,
+      "out_seconds": 105.0,
+      "title": "THE 2026 SOLO FOUNDER BLUEPRINT",
+      "chartData": [
+        { "label": "Leverage Multiplier", "value": 10000, "change": 100, "suffix": "x" },
+        { "label": "Middle Management", "value": 0, "change": -100, "suffix": " layers" },
+        { "label": "Capital Efficiency", "value": 98, "change": 98, "suffix": "%" }
+      ],
+      "columns": 3,
+      "chartColors": ["#22D3EE", "#34D399", "#A78BFA"],
+      "chartAnimation": "cascade",
+      "backgroundColor": "#0F172A"
+    }
+  ],
+  "overlays": [
+    {
+      "type": "stat_reveal",
+      "in_seconds": 3.0,
+      "out_seconds": 13.5,
+      "text": "$18.1M",
+      "subtitle": "Revenue Per Employee",
+      "accentColor": "#22D3EE",
+      "position": "bottom-right"
+    },
+    {
+      "type": "section_title",
+      "in_seconds": 33.0,
+      "out_seconds": 45.0,
+      "text": "ZERO PRODUCT MANAGERS",
+      "subtitle": "Applied Research Lab Model",
+      "accentColor": "#34D399"
+    },
+    {
+      "type": "stat_reveal",
+      "in_seconds": 54.0,
+      "out_seconds": 70.0,
+      "text": "70%+",
+      "subtitle": "Net Profit Margin",
+      "accentColor": "#F59E0B",
+      "position": "bottom-right"
+    }
+  ],
+  "audio": {
+    "narration": {
+      "src": "midjourney_11_people_200m/narration_full.mp3",
+      "volume": 1.0
+    },
+    "music": {
+      "src": "midjourney_11_people_200m/music.mp3",
+      "volume": 0.12,
+      "loop": true
+    }
+  },
+  "captions": []
+}
