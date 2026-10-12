@@ -62,62 +62,63 @@ export const TechTheorySample: React.FC = () => {
   ];
 
   const Container = AbsoluteFill as any;
+  const AudioElement = Audio as any;
+  const SequenceElement = Sequence as any;
 
   return (
     <Container style={{ backgroundColor: "#070B14" }}>
       {/* ======================================================== */}
       {/* AUDIO LAYER: Voiceover + Ducked BGM + Studio SFX        */}
       {/* ======================================================== */}
-      <Audio
+      <AudioElement
         src={resolveAsset("techtheory_ep02/sample/narration.mp3")}
         volume={1.0}
       />
-      <Audio
+      <AudioElement
         src={resolveAsset("techtheory_ep02/sample/bgm.mp3")}
         volume={0.09}
       />
 
       {/* SFX: Opening Impact Bass */}
-      <Sequence from={5} durationInFrames={180}>
-        <Audio
+      <SequenceElement from={5} durationInFrames={180}>
+        <AudioElement
           src={resolveAsset("techtheory_ep02/sample/impact.mp3")}
           volume={0.4}
         />
-      </Sequence>
+      </SequenceElement>
 
       {/* SFX: Chart Reveal Whoosh */}
-      <Sequence from={370} durationInFrames={120}>
-        <Audio
+      <SequenceElement from={370} durationInFrames={120}>
+        <AudioElement
           src={resolveAsset("techtheory_ep02/sample/whoosh.mp3")}
           volume={0.35}
         />
-      </Sequence>
+      </SequenceElement>
 
       {/* SFX: Nvidia Spotlight Impact */}
-      <Sequence from={826} durationInFrames={180}>
-        <Audio
+      <SequenceElement from={826} durationInFrames={180}>
+        <AudioElement
           src={resolveAsset("techtheory_ep02/sample/impact.mp3")}
           volume={0.4}
         />
-      </Sequence>
+      </SequenceElement>
 
       {/* ======================================================== */}
       {/* SCENE 1: Title Takeover ($600B AI Capex Gamble)           */}
       {/* ======================================================== */}
-      <Sequence from={0} durationInFrames={SCENE1_FRAMES}>
+      <SequenceElement from={0} durationInFrames={SCENE1_FRAMES}>
         <TitleTakeover
-          words={["$600B", "AI", "CAPEX", "GAMBLE"]}
-          subtitle="Big Tech's Most Expensive Bet in Corporate History"
+          title="$600 BILLION AI GAMBLE"
+          supportingLine="Big Tech's Most Expensive Bet in Corporate History"
+          badge="THE SILICON VALLEY BUBBLE"
           accentColor="#06B6D4"
-          bgImage="techtheory_ep02/images/broll_datacenter_racks.jpg"
-          overlayOpacity={0.78}
         />
-      </Sequence>
+      </SequenceElement>
 
       {/* ======================================================== */}
       {/* SCENE 2: Rising Logo-On-Bar Chart (Capex Comparison)     */}
       {/* ======================================================== */}
-      <Sequence from={SCENE1_FRAMES} durationInFrames={SCENE2_FRAMES}>
+      <SequenceElement from={SCENE1_FRAMES} durationInFrames={SCENE2_FRAMES}>
         <BarChart
           title="ANNUAL AI INFRASTRUCTURE SPENDING"
           data={barChartData}
@@ -129,12 +130,12 @@ export const TechTheorySample: React.FC = () => {
           textColor="#F8FAFC"
           gridColor="#334155"
         />
-      </Sequence>
+      </SequenceElement>
 
       {/* ======================================================== */}
       {/* SCENE 3: CompanySpotlight (Nvidia & 78% Gross Margin)    */}
       {/* ======================================================== */}
-      <Sequence from={SCENE1_FRAMES + SCENE2_FRAMES} durationInFrames={SCENE3_FRAMES}>
+      <SequenceElement from={SCENE1_FRAMES + SCENE2_FRAMES} durationInFrames={SCENE3_FRAMES}>
         <CompanySpotlight
           name="NVIDIA"
           role="The Silicon Monopoly"
@@ -151,7 +152,7 @@ export const TechTheorySample: React.FC = () => {
             { label: "Blackwell Rack", value: "$3.2M" },
           ]}
         />
-      </Sequence>
+      </SequenceElement>
 
       {/* ======================================================== */}
       {/* SUBTITLE LAYER: Syllable-synced Captions Overlay         */}

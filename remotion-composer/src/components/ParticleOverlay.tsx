@@ -19,7 +19,9 @@ export type ParticleType =
   | "petals"
   | "sparkles"
   | "mist"
-  | "light-rays";
+  | "light-rays"
+  | "dust"
+  | "none";
 
 interface ParticleOverlayProps {
   type: ParticleType;
@@ -343,6 +345,10 @@ export const ParticleOverlay: React.FC<ParticleOverlayProps> = ({
       return <Mist count={count} color={color} intensity={intensity} />;
     case "light-rays":
       return <LightRays count={count} color={color} intensity={intensity} />;
+    case "dust":
+      return <Sparkles count={count} color={color} intensity={intensity * 0.4} />;
+    case "none":
+      return null;
     default:
       return null;
   }

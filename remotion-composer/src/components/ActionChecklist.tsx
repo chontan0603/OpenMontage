@@ -17,6 +17,7 @@ export interface ChecklistTask {
 interface ActionChecklistProps {
   title?: string;
   subtitle?: string;
+  badge?: string;
   tasks: ChecklistTask[];
   accentColor?: string;
   textColor?: string;
@@ -27,6 +28,7 @@ interface ActionChecklistProps {
 export const ActionChecklist: React.FC<ActionChecklistProps> = ({
   title = "EXECUTION CHECKLIST",
   subtitle,
+  badge = "Verified Operational Protocol",
   tasks,
   accentColor = "#10B981",
   textColor = "#F8FAFC",
@@ -94,7 +96,7 @@ export const ActionChecklist: React.FC<ActionChecklistProps> = ({
                 marginBottom: 8,
               }}
             >
-              Verified Operational Protocol
+              {badge}
             </div>
             <div
               style={{

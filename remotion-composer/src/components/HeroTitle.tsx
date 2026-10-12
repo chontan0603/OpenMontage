@@ -9,6 +9,7 @@ import {
 type HeroTitleProps = {
   title: string;
   subtitle?: string;
+  tag?: string;
   accentColor?: string;
   textColor?: string;
   subtitleColor?: string;
@@ -21,6 +22,7 @@ const DEFAULT_SCRIM =
 export const HeroTitle: React.FC<HeroTitleProps> = ({
   title,
   subtitle,
+  tag,
   accentColor = "#EC4899",
   textColor = "#F8FAFC",
   subtitleColor = "#94A3B8",
@@ -58,6 +60,27 @@ export const HeroTitle: React.FC<HeroTitleProps> = ({
           alignItems: "center",
         }}
       >
+        {/* Optional Tag Badge */}
+        {tag && (
+          <div
+            style={{
+              padding: "6px 20px",
+              borderRadius: 30,
+              background: `${accentColor}22`,
+              border: `1px solid ${accentColor}66`,
+              color: accentColor,
+              fontSize: 14,
+              fontWeight: 800,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              marginBottom: 20,
+              opacity: spring({ frame, fps, config: { damping: 16 } }),
+            }}
+          >
+            {tag}
+          </div>
+        )}
+
         {/* Main title with word-safe flexbox and per-letter spring entrance */}
         <div
           style={{

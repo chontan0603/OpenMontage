@@ -17,6 +17,13 @@ import { CaptionOverlay, WordCaption } from "./components/CaptionOverlay";
 import { CollageBurst, CollageBurstProps } from "./CollageBurst";
 import { LyricOverlay, LyricOverlayProps } from "./LyricOverlay";
 import { TechTheorySample } from "./TechTheorySample";
+import {
+  TechTheoryAct1,
+  TechTheoryAct2,
+  TechTheoryAct3,
+  TechTheoryAct4,
+  TechTheoryAct5,
+} from "./TechTheoryEp02";
 
 
 // ---------------------------------------------------------------------------
@@ -336,6 +343,46 @@ export const Root: React.FC = () => {
         id="TechTheorySample"
         component={TechTheorySample}
         durationInFrames={1276}
+        fps={60}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TechTheoryEp02-Act1"
+        component={TechTheoryAct1}
+        durationInFrames={3699}
+        fps={60}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TechTheoryEp02-Act2"
+        component={TechTheoryAct2}
+        durationInFrames={4326}
+        fps={60}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TechTheoryEp02-Act3"
+        component={TechTheoryAct3}
+        durationInFrames={4000}
+        fps={60}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TechTheoryEp02-Act4"
+        component={TechTheoryAct4}
+        durationInFrames={3629}
+        fps={60}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TechTheoryEp02-Act5"
+        component={TechTheoryAct5}
+        durationInFrames={3542}
         fps={60}
         width={1920}
         height={1080}
