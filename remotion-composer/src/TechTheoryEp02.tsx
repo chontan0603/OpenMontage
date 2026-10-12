@@ -455,10 +455,10 @@ export const TechTheoryAct1: React.FC = () => {
 // ============================================================================
 export const TechTheoryAct2: React.FC = () => {
   const barChartData: BarDatum[] = [
-    { label: "Google", value: 52, logoUrl: "techtheory_ep02/logos/google.svg", color: "#4285F4", subLabel: "Capex: $52B", delaySeconds: 0.1 },
-    { label: "Meta", value: 40, logoUrl: "techtheory_ep02/logos/meta.svg", color: "#0081FB", subLabel: "Capex: $40B", delaySeconds: 0.4 },
-    { label: "Microsoft", value: 64, logoUrl: "techtheory_ep02/logos/microsoft.svg", color: "#00A4EF", subLabel: "Capex: $64B", delaySeconds: 0.7 },
-    { label: "Amazon", value: 75, logoUrl: "techtheory_ep02/logos/amazon.svg", color: "#FF9900", subLabel: "Capex: $75B", delaySeconds: 1.0 },
+    { label: "Amazon", value: 75, logoUrl: "techtheory_ep02/logos/amazon.svg", color: "#FF9900", subLabel: "Capex: $75B", delaySeconds: 1.2 },
+    { label: "Microsoft", value: 64, logoUrl: "techtheory_ep02/logos/microsoft.svg", color: "#00A4EF", subLabel: "Capex: $64B", delaySeconds: 5.8 },
+    { label: "Google", value: 52, logoUrl: "techtheory_ep02/logos/google.svg", color: "#4285F4", subLabel: "Capex: $52B", delaySeconds: 8.8 },
+    { label: "Meta", value: 40, logoUrl: "techtheory_ep02/logos/meta.svg", color: "#0081FB", subLabel: "Capex: $40B", delaySeconds: 11.2 },
   ];
 
   return (
@@ -466,11 +466,12 @@ export const TechTheoryAct2: React.FC = () => {
       {/* Audio Layer - Clean Voice Only */}
       <AudioElement src={resolveAsset("techtheory_ep02/audio/act2.mp3")} volume={1.0} />
 
-      {/* Cut 1: Title Takeover (0 - 5.0s | 300 frames) */}
-      <SequenceElement from={0} durationInFrames={300}>
+      {/* Cut 1: Title Takeover (0.00 - 6.24s | 374 frames)
+          Dialogue: "When ChatGPT launched in late 2022, corporate boardroom panic set in overnight." */}
+      <SequenceElement from={0} durationInFrames={374}>
         <Container>
           <AnimeScene
-            images={["techtheory_ep02/images/broll_silicon_valley.jpg"]}
+            images={["techtheory_ep02/images/broll_boardroom_meeting.jpg"]}
             animation="pan-left"
             particles="none"
             vignette={true}
@@ -484,25 +485,72 @@ export const TechTheoryAct2: React.FC = () => {
           />
           <TitleTakeover
             title="THE HYPERSCALER ARMS RACE"
-            supportingLine="Four Trillion-Dollar Titans Trapped in a Prisoner's Dilemma"
-            badge="CAPITAL OUTFLOW"
+            supportingLine="Corporate Boardroom Panic Set In Overnight"
+            badge="LATE 2022 CATALYST"
             accentColor="#00A4EF"
           />
         </Container>
       </SequenceElement>
 
-      {/* Cut 2: Boardroom Panic Meeting B-Roll (5.0 - 11.0s | 360 frames) */}
-      <SequenceElement from={300} durationInFrames={360}>
-        <AnimeScene
-          images={["techtheory_ep02/images/broll_boardroom_meeting.jpg"]}
-          animation="ken-burns"
-          particles="none"
-          vignette={true}
-        />
+      {/* Cut 2: An Existential Threat Callout (6.24 - 13.71s | 449 frames)
+          Dialogue: "Chief executives realized that falling behind in foundation models wasn't just a missed product cycle—it was an existential threat." */}
+      <SequenceElement from={374} durationInFrames={449}>
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_boardroom_meeting.jpg"]}
+            animation="zoom-in"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(24, 7, 7, 0.80)",
+            }}
+          />
+          <CalloutBox
+            type="warning"
+            title="AN EXISTENTIAL THREAT"
+            text="Chief executives realized that falling behind in foundation models was not just a missed cycle—it was an existential threat to market survival."
+            borderColor="#EF4444"
+            containerBackgroundColor="transparent"
+            backgroundColor="rgba(28, 11, 11, 0.90)"
+          />
+        </Container>
       </SequenceElement>
 
-      {/* Cut 3: Rising Logo-On-Bar Chart (11.0 - 24.0s | 780 frames) */}
-      <SequenceElement from={660} durationInFrames={780}>
+      {/* Cut 3: The Hardware Arms Race (13.71 - 19.00s | 317 frames)
+          Dialogue: "Almost immediately, capital expenditure exploded into an unprecedented hardware arms race." */}
+      <SequenceElement from={823} durationInFrames={317}>
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_datacenter_racks.jpg"]}
+            animation="pan-right"
+            particles="dust"
+            particleColor="#38BDF8"
+            particleIntensity={0.4}
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <TitleTakeover
+            title="THE HARDWARE ARMS RACE"
+            supportingLine="Capital Expenditure Exploded Overnight Into Mega-Datacenters"
+            badge="EXPONENTIAL CAPEX"
+            accentColor="#38BDF8"
+          />
+        </Container>
+      </SequenceElement>
+
+      {/* Cut 4: Rising Logo-On-Bar Chart (19.00 - 36.00s | 1020 frames)
+          Dialogue: "In 2024 alone, Amazon committed seventy-five billion dollars. Microsoft poured in sixty-four billion. Google allocated fifty-two billion, and Meta spent forty billion dollars, buying every advanced computing cluster they could find." */}
+      <SequenceElement from={1140} durationInFrames={1020}>
         <BarChart
           title="ANNUAL AI INFRASTRUCTURE SPENDING"
           data={barChartData}
@@ -516,79 +564,13 @@ export const TechTheoryAct2: React.FC = () => {
         />
       </SequenceElement>
 
-      {/* Cut 4: Combined Capex Stat Card (24.0 - 31.0s | 420 frames) */}
-      <SequenceElement from={1440} durationInFrames={420}>
+      {/* Cut 5: The Historical Paradox Callout (36.00 - 44.00s | 480 frames)
+          Dialogue: "And this is where the story gets strange. In every previous technology cycle, infrastructure investments lasted for decades." */}
+      <SequenceElement from={2160} durationInFrames={480}>
         <Container>
           <AnimeScene
-            images={["techtheory_ep02/images/tpu_cluster_authentic.jpg"]}
+            images={["techtheory_ep02/images/broll_silicon_valley.jpg"]}
             animation="drift-up"
-            particles="dust"
-            particleColor="#38BDF8"
-            particleIntensity={0.4}
-            vignette={true}
-          />
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              backgroundColor: "rgba(7, 11, 20, 0.75)",
-            }}
-          />
-          <StatCard
-            stat="$231 BILLION"
-            subtitle="Combined Annual Capex of Amazon, Microsoft, Google & Meta"
-            accentColor="#38BDF8"
-            backgroundColor="rgba(11, 19, 38, 0.88)"
-          />
-        </Container>
-      </SequenceElement>
-
-      {/* Cut 5: Server Racks Interior B-Roll (31.0 - 38.0s | 420 frames) */}
-      <SequenceElement from={1860} durationInFrames={420}>
-        <AnimeScene
-          images={["techtheory_ep02/images/broll_datacenter_racks.jpg"]}
-          animation="zoom-in"
-          particles="dust"
-          particleColor="#00A4EF"
-          particleIntensity={0.5}
-          vignette={true}
-        />
-      </SequenceElement>
-
-      {/* Cut 6: Capex Distribution KPI Grid (38.0 - 47.0s | 540 frames) */}
-      <SequenceElement from={2280} durationInFrames={540}>
-        <Container>
-          <AnimeScene
-            images={["techtheory_ep02/images/broll_datacenter_racks.jpg"]}
-            animation="pan-right"
-            particles="none"
-            vignette={true}
-          />
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              backgroundColor: "rgba(7, 11, 20, 0.75)",
-            }}
-          />
-          <ComparisonCard
-            title="THE HARDWARE CASH SINK"
-            leftLabel="Silicon & GPU Racks"
-            leftValue="68% of Total Spend"
-            rightLabel="Power & Substation Grid"
-            rightValue="22% of Total Spend"
-            backgroundColor="transparent"
-            cardBackgroundColor="rgba(15, 23, 42, 0.88)"
-          />
-        </Container>
-      </SequenceElement>
-
-      {/* Cut 7: Zuckerberg's Gamble Callout (47.0 - 55.0s | 480 frames) */}
-      <SequenceElement from={2820} durationInFrames={480}>
-        <Container>
-          <AnimeScene
-            images={["techtheory_ep02/images/broll_boardroom_meeting.jpg"]}
-            animation="zoom-in"
             particles="none"
             vignette={true}
           />
@@ -601,8 +583,8 @@ export const TechTheoryAct2: React.FC = () => {
           />
           <CalloutBox
             type="info"
-            title="PRISONER'S DILEMMA"
-            text="If any cloud titan stops buying clusters, their stock is punished. They cannot stop even if demand is phantom."
+            title="THE HISTORICAL PARADOX"
+            text="In every previous technology cycle, infrastructure investments lasted for decades. Fiber cables laid in the 1990s powered twenty-five years of the modern digital economy."
             borderColor="#0081FB"
             containerBackgroundColor="transparent"
             backgroundColor="rgba(15, 23, 42, 0.88)"
@@ -610,21 +592,40 @@ export const TechTheoryAct2: React.FC = () => {
         </Container>
       </SequenceElement>
 
-      {/* Cut 8: Developer Code Screen B-Roll (55.0 - 62.5s | 450 frames) */}
-      <SequenceElement from={3300} durationInFrames={450}>
-        <AnimeScene
-          images={["techtheory_ep02/images/broll_programmer_code.jpg"]}
-          animation="ken-burns"
-          particles="none"
-          vignette={true}
-        />
-      </SequenceElement>
-
-      {/* Cut 9: Outflow vs Inflow Comparison (62.5 - 72.10s | 576 frames) */}
-      <SequenceElement from={3750} durationInFrames={576}>
+      {/* Cut 6: 25-Year Asset Lifespan Stat Card (44.00 - 52.00s | 480 frames)
+          Dialogue: "When telecom companies laid undersea fiber optic cables in the late nineties, those cables remained operational for twenty-five years." */}
+      <SequenceElement from={2640} durationInFrames={480}>
         <Container>
           <AnimeScene
-            images={["techtheory_ep02/images/broll_silicon_valley.jpg"]}
+            images={["techtheory_ep02/images/broll_datacenter_racks.jpg"]}
+            animation="zoom-in"
+            particles="dust"
+            particleColor="#38BDF8"
+            particleIntensity={0.3}
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <StatCard
+            stat="25 YEARS"
+            subtitle="Undersea Fiber Optic Lifespan (1990s Infrastructure Cycle)"
+            accentColor="#38BDF8"
+            backgroundColor="rgba(11, 19, 38, 0.88)"
+          />
+        </Container>
+      </SequenceElement>
+
+      {/* Cut 7: Velocity Comparison (52.00 - 58.00s | 360 frames)
+          Dialogue: "Datacenter AI clusters, by contrast, burn through capital at staggering velocity." */}
+      <SequenceElement from={3120} durationInFrames={360}>
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/tpu_cluster_authentic.jpg"]}
             animation="pan-left"
             particles="none"
             vignette={true}
@@ -637,13 +638,69 @@ export const TechTheoryAct2: React.FC = () => {
             }}
           />
           <ComparisonCard
-            title="CAPEX VS ACTUAL REVENUE"
-            leftLabel="Hyperscaler Spend 2024"
-            leftValue="$231 Billion"
-            rightLabel="Generative AI Software Sales"
-            rightValue="<$25 Billion"
+            title="DEPRECIATION VELOCITY"
+            leftLabel="1990s Undersea Fiber"
+            leftValue="25-Year Operational Asset"
+            rightLabel="2020s AI Compute"
+            rightValue="3-5 Year Economic Lifespan"
             backgroundColor="transparent"
             cardBackgroundColor="rgba(15, 23, 42, 0.88)"
+          />
+        </Container>
+      </SequenceElement>
+
+      {/* Cut 8: Rapid Obsolescence Warning (58.00 - 67.00s | 540 frames)
+          Dialogue: "High-density GPU racks run blistering hot, consume megawatts of grid power, and become economically obsolete in just three to five years." */}
+      <SequenceElement from={3480} durationInFrames={540}>
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_datacenter_racks.jpg"]}
+            animation="zoom-in"
+            particles="dust"
+            particleColor="#EF4444"
+            particleIntensity={0.5}
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(24, 7, 7, 0.80)",
+            }}
+          />
+          <CalloutBox
+            type="warning"
+            title="ECONOMIC OBSOLESCENCE"
+            text="High-density GPU clusters run blistering hot, consume megawatts of grid power, and become economically obsolete in just 3 to 5 years."
+            borderColor="#EF4444"
+            containerBackgroundColor="transparent"
+            backgroundColor="rgba(28, 11, 11, 0.90)"
+          />
+        </Container>
+      </SequenceElement>
+
+      {/* Cut 9: Ticking Clock Title Takeover (67.00 - 72.10s | 306 frames)
+          Dialogue: "Big Tech wasn't just investing capital—they were burning it on a ticking clock." */}
+      <SequenceElement from={4020} durationInFrames={306}>
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_boardroom_meeting.jpg"]}
+            animation="ken-burns"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <TitleTakeover
+            title="A TICKING CLOCK"
+            supportingLine="Big Tech is burning capital against rapid silicon obsolescence"
+            badge="BURNING HORIZON"
+            accentColor="#EF4444"
           />
         </Container>
       </SequenceElement>
