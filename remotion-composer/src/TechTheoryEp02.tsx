@@ -468,12 +468,27 @@ export const TechTheoryAct2: React.FC = () => {
 
       {/* Cut 1: Title Takeover (0 - 5.0s | 300 frames) */}
       <SequenceElement from={0} durationInFrames={300}>
-        <TitleTakeover
-          title="THE HYPERSCALER ARMS RACE"
-          supportingLine="Four Trillion-Dollar Titans Trapped in a Prisoner's Dilemma"
-          badge="CAPITAL OUTFLOW"
-          accentColor="#00A4EF"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_silicon_valley.jpg"]}
+            animation="pan-left"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <TitleTakeover
+            title="THE HYPERSCALER ARMS RACE"
+            supportingLine="Four Trillion-Dollar Titans Trapped in a Prisoner's Dilemma"
+            badge="CAPITAL OUTFLOW"
+            accentColor="#00A4EF"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 2: Boardroom Panic Meeting B-Roll (5.0 - 11.0s | 360 frames) */}
@@ -503,12 +518,29 @@ export const TechTheoryAct2: React.FC = () => {
 
       {/* Cut 4: Combined Capex Stat Card (24.0 - 31.0s | 420 frames) */}
       <SequenceElement from={1440} durationInFrames={420}>
-        <StatCard
-          stat="$231 BILLION"
-          subtitle="Combined Annual Capex of Amazon, Microsoft, Alphabet & Meta"
-          accentColor="#38BDF8"
-          backgroundColor="rgba(11, 19, 38, 0.9)"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/tpu_cluster_authentic.jpg"]}
+            animation="drift-up"
+            particles="dust"
+            particleColor="#38BDF8"
+            particleIntensity={0.4}
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <StatCard
+            stat="$231 BILLION"
+            subtitle="Combined Annual Capex of Amazon, Microsoft, Google & Meta"
+            accentColor="#38BDF8"
+            backgroundColor="rgba(11, 19, 38, 0.88)"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 5: Server Racks Interior B-Roll (31.0 - 38.0s | 420 frames) */}
@@ -525,26 +557,57 @@ export const TechTheoryAct2: React.FC = () => {
 
       {/* Cut 6: Capex Distribution KPI Grid (38.0 - 47.0s | 540 frames) */}
       <SequenceElement from={2280} durationInFrames={540}>
-        <ComparisonCard
-          title="THE HARDWARE CASH SINK"
-          leftLabel="Silicon & GPU Racks"
-          leftValue="68% of Total Spend"
-          rightLabel="Power & Substation Grid"
-          rightValue="22% of Total Spend"
-          backgroundColor="#070B14"
-          cardBackgroundColor="rgba(15, 23, 42, 0.9)"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_datacenter_racks.jpg"]}
+            animation="pan-right"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <ComparisonCard
+            title="THE HARDWARE CASH SINK"
+            leftLabel="Silicon & GPU Racks"
+            leftValue="68% of Total Spend"
+            rightLabel="Power & Substation Grid"
+            rightValue="22% of Total Spend"
+            backgroundColor="transparent"
+            cardBackgroundColor="rgba(15, 23, 42, 0.88)"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 7: Zuckerberg's Gamble Callout (47.0 - 55.0s | 480 frames) */}
       <SequenceElement from={2820} durationInFrames={480}>
-        <CalloutBox
-          type="info"
-          title="PRISONER'S DILEMMA"
-          text="If any cloud titan stops buying clusters, their stock is punished. They cannot stop even if demand is phantom."
-          borderColor="#0081FB"
-          backgroundColor="rgba(15, 23, 42, 0.9)"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_boardroom_meeting.jpg"]}
+            animation="zoom-in"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <CalloutBox
+            type="info"
+            title="PRISONER'S DILEMMA"
+            text="If any cloud titan stops buying clusters, their stock is punished. They cannot stop even if demand is phantom."
+            borderColor="#0081FB"
+            containerBackgroundColor="transparent"
+            backgroundColor="rgba(15, 23, 42, 0.88)"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 8: Developer Code Screen B-Roll (55.0 - 62.5s | 450 frames) */}
@@ -559,15 +622,30 @@ export const TechTheoryAct2: React.FC = () => {
 
       {/* Cut 9: Outflow vs Inflow Comparison (62.5 - 72.10s | 576 frames) */}
       <SequenceElement from={3750} durationInFrames={576}>
-        <ComparisonCard
-          title="CAPEX VS ACTUAL REVENUE"
-          leftLabel="Hyperscaler Spend 2024"
-          leftValue="$231 Billion"
-          rightLabel="Generative AI Software Sales"
-          rightValue="<$25 Billion"
-          backgroundColor="#070B14"
-          cardBackgroundColor="rgba(15, 23, 42, 0.9)"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_silicon_valley.jpg"]}
+            animation="pan-left"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <ComparisonCard
+            title="CAPEX VS ACTUAL REVENUE"
+            leftLabel="Hyperscaler Spend 2024"
+            leftValue="$231 Billion"
+            rightLabel="Generative AI Software Sales"
+            rightValue="<$25 Billion"
+            backgroundColor="transparent"
+            cardBackgroundColor="rgba(15, 23, 42, 0.88)"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Syllable-Synced Subtitles */}
@@ -600,12 +678,27 @@ export const TechTheoryAct3: React.FC = () => {
 
       {/* Cut 1: Title Takeover (0 - 4.5s | 270 frames) */}
       <SequenceElement from={0} durationInFrames={270}>
-        <TitleTakeover
-          title="THE SILICON MONOPOLY"
-          supportingLine="One Company Captures Almost Every Single Dollar"
-          badge="THE GOLD RUSH PICKAXE"
-          accentColor="#76B900"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_silicon_valley.jpg"]}
+            animation="pan-right"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <TitleTakeover
+            title="THE SILICON MONOPOLY"
+            supportingLine="One Company Captures Almost Every Single Dollar"
+            badge="THE GOLD RUSH PICKAXE"
+            accentColor="#76B900"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 2: Nvidia & Jensen Huang Spotlight (4.5 - 15.0s | 630 frames) */}
@@ -630,12 +723,29 @@ export const TechTheoryAct3: React.FC = () => {
 
       {/* Cut 3: 78% Gross Margin Stat Card (15.0 - 22.0s | 420 frames) */}
       <SequenceElement from={900} durationInFrames={420}>
-        <StatCard
-          stat="78% MARGIN"
-          subtitle="Nvidia Net Profit Margin on Blackwell Architecture Compute"
-          accentColor="#76B900"
-          backgroundColor="rgba(11, 28, 11, 0.9)"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_datacenter_racks.jpg"]}
+            animation="drift-up"
+            particles="dust"
+            particleColor="#76B900"
+            particleIntensity={0.4}
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <StatCard
+            stat="78% MARGIN"
+            subtitle="Nvidia Net Profit Margin on Blackwell Architecture Compute"
+            accentColor="#76B900"
+            backgroundColor="rgba(11, 28, 11, 0.88)"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 4: Silicon Valley Campus B-Roll (22.0 - 29.0s | 420 frames) */}
@@ -652,12 +762,27 @@ export const TechTheoryAct3: React.FC = () => {
 
       {/* Cut 5: The CUDA Software Moat Title (29.0 - 37.0s | 480 frames) */}
       <SequenceElement from={1740} durationInFrames={480}>
-        <TitleTakeover
-          title="THE CUDA SOFTWARE MOAT"
-          supportingLine="18 Years of Developer Lock-In That Competitors Cannot Break"
-          badge="SOFTWARE DEFENSE"
-          accentColor="#76B900"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_programmer_code.jpg"]}
+            animation="zoom-in"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <TitleTakeover
+            title="THE CUDA SOFTWARE MOAT"
+            supportingLine="18 Years of Developer Lock-In That Competitors Cannot Break"
+            badge="SOFTWARE DEFENSE"
+            accentColor="#76B900"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 6: Programmer Code B-Roll (37.0 - 44.0s | 420 frames) */}
@@ -672,23 +797,56 @@ export const TechTheoryAct3: React.FC = () => {
 
       {/* Cut 7: The Circular Funding Loop Callout (44.0 - 54.0s | 600 frames) */}
       <SequenceElement from={2640} durationInFrames={600}>
-        <CalloutBox
-          type="warning"
-          title="THE CIRCULAR FUNDING LOOP"
-          text="Cloud giants wire billions into AI startups -> Startups wire that cash straight back to Nvidia and cloud providers to buy computing clusters. Capital cycling in a closed loop."
-          borderColor="#F59E0B"
-          backgroundColor="rgba(15, 23, 42, 0.9)"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_boardroom_meeting.jpg"]}
+            animation="pan-left"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <CalloutBox
+            type="warning"
+            title="THE CIRCULAR FUNDING LOOP"
+            text="Cloud giants wire billions into AI startups -> Startups wire that cash straight back to Nvidia and cloud providers to buy computing clusters. Capital cycling in a closed loop."
+            borderColor="#F59E0B"
+            containerBackgroundColor="transparent"
+            backgroundColor="rgba(15, 23, 42, 0.88)"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 8: GPU Datacenter B-Roll Finale (54.0 - 66.67s | 760 frames) */}
       <SequenceElement from={3240} durationInFrames={760}>
-        <HeroTitle
-          title="THE ONE-WAY CASH FLOW"
-          subtitle="Money enters through venture capital and hyperscaler debt, but it exits in one direction: Santa Clara, California."
-          tag="THE WINNER TAKE ALL"
-          accentColor="#76B900"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/tpu_cluster_authentic.jpg"]}
+            animation="drift-up"
+            particles="dust"
+            particleColor="#76B900"
+            particleIntensity={0.3}
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <HeroTitle
+            title="THE ONE-WAY CASH FLOW"
+            subtitle="Money enters through venture capital and hyperscaler debt, but it exits in one direction: Santa Clara, California."
+            tag="THE WINNER TAKE ALL"
+            accentColor="#76B900"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Syllable-Synced Subtitles */}
@@ -721,35 +879,82 @@ export const TechTheoryAct4: React.FC = () => {
 
       {/* Cut 1: The $570B Hole Title Takeover (0 - 5.0s | 300 frames) */}
       <SequenceElement from={0} durationInFrames={300}>
-        <TitleTakeover
-          title="THE $570B REVENUE HOLE"
-          supportingLine="Wall Street's Most Dangerous Financial Disconnect"
-          badge="SEQUOIA CAPITAL CALCULATION"
-          accentColor="#EF4444"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_datacenter_racks.jpg"]}
+            animation="pan-left"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(24, 7, 7, 0.80)",
+            }}
+          />
+          <TitleTakeover
+            title="THE $570B REVENUE HOLE"
+            supportingLine="Wall Street's Most Dangerous Financial Disconnect"
+            badge="SEQUOIA CAPITAL CALCULATION"
+            accentColor="#EF4444"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 2: Hero Title - Sequoia Valuation Math (5.0 - 12.0s | 420 frames) */}
       <SequenceElement from={300} durationInFrames={420}>
-        <HeroTitle
-          title="THE MATH DOES NOT CLOSE"
-          subtitle="Sequoia Capital estimated the AI ecosystem needs $600B in annual revenue to pay back current datacenter investment."
-          tag="VALUATION CRISIS"
-          accentColor="#EF4444"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_boardroom_meeting.jpg"]}
+            animation="zoom-in"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <HeroTitle
+            title="THE MATH DOES NOT CLOSE"
+            subtitle="Sequoia Capital estimated the AI ecosystem needs $600B in annual revenue to pay back current datacenter investment."
+            tag="VALUATION CRISIS"
+            accentColor="#EF4444"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 3: Required vs Actual GenAI Revenue (12.0 - 21.0s | 540 frames) */}
       <SequenceElement from={720} durationInFrames={540}>
-        <ComparisonCard
-          title="THE REVENUE RECKONING"
-          leftLabel="Required Industry Revenue"
-          leftValue="$600 Billion"
-          rightLabel="Actual Software Revenue"
-          rightValue="$25 Billion"
-          backgroundColor="#070B14"
-          cardBackgroundColor="rgba(15, 23, 42, 0.9)"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/tpu_cluster_authentic.jpg"]}
+            animation="drift-up"
+            particles="dust"
+            particleColor="#EF4444"
+            particleIntensity={0.3}
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <ComparisonCard
+            title="THE REVENUE RECKONING"
+            leftLabel="Required Industry Revenue"
+            leftValue="$600 Billion"
+            rightLabel="Actual Software Revenue"
+            rightValue="$25 Billion"
+            backgroundColor="transparent"
+            cardBackgroundColor="rgba(15, 23, 42, 0.88)"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 4: Creative Artist B-Roll (21.0 - 28.0s | 420 frames) */}
@@ -764,23 +969,54 @@ export const TechTheoryAct4: React.FC = () => {
 
       {/* Cut 5: 80% Pilot Failure Rate Stat Card (28.0 - 36.0s | 480 frames) */}
       <SequenceElement from={1680} durationInFrames={480}>
-        <StatCard
-          stat="80% FAILED"
-          subtitle="Enterprise Generative AI Pilots Failing to Reach Production Deployment"
-          accentColor="#EF4444"
-          backgroundColor="rgba(28, 11, 11, 0.9)"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_creative_artist.jpg"]}
+            animation="zoom-in"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(24, 7, 7, 0.80)",
+            }}
+          />
+          <StatCard
+            stat="80% FAILED"
+            subtitle="Enterprise Generative AI Pilots Failing to Reach Production Deployment"
+            accentColor="#EF4444"
+            backgroundColor="rgba(28, 11, 11, 0.88)"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 6: Enterprise Adoption Mirage Callout (36.0 - 44.0s | 480 frames) */}
       <SequenceElement from={2160} durationInFrames={480}>
-        <CalloutBox
-          type="warning"
-          title="THE ENTERPRISE MIRAGE"
-          text="Enterprises experimented with chatbot demos, but security concerns, hallucinations, and inference bills stopped rollout."
-          borderColor="#EF4444"
-          backgroundColor="rgba(15, 23, 42, 0.9)"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_silicon_valley.jpg"]}
+            animation="pan-right"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <CalloutBox
+            type="warning"
+            title="THE ENTERPRISE MIRAGE"
+            text="Enterprises experimented with chatbot demos, but security concerns, hallucinations, and inference bills stopped rollout."
+            borderColor="#EF4444"
+            containerBackgroundColor="transparent"
+            backgroundColor="rgba(15, 23, 42, 0.88)"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 7: Programmer Debugging B-Roll (44.0 - 51.5s | 450 frames) */}
@@ -797,12 +1033,27 @@ export const TechTheoryAct4: React.FC = () => {
 
       {/* Cut 8: The Productivity Paradox Finale (51.5 - 60.48s | 539 frames) */}
       <SequenceElement from={3090} durationInFrames={539}>
-        <HeroTitle
-          title="THE PRODUCTIVITY GAP"
-          subtitle="Until AI automates complete organizational workflows rather than paragraphs, the revenue cannot materialize."
-          tag="THE HARD TRUTH"
-          accentColor="#F59E0B"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_datacenter_racks.jpg"]}
+            animation="drift-up"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <HeroTitle
+            title="THE PRODUCTIVITY GAP"
+            subtitle="Until AI automates complete organizational workflows rather than paragraphs, the revenue cannot materialize."
+            tag="THE HARD TRUTH"
+            accentColor="#F59E0B"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Syllable-Synced Subtitles */}
@@ -841,23 +1092,55 @@ export const TechTheoryAct5: React.FC = () => {
 
       {/* Cut 1: The Reckoning Title Takeover (0 - 4.5s | 270 frames) */}
       <SequenceElement from={0} durationInFrames={270}>
-        <TitleTakeover
-          title="THE INEVITABLE RESET"
-          supportingLine="History Does Not Repeat Itself, But It Often Rhymes"
-          badge="THE HISTORICAL CYCLE"
-          accentColor="#A855F7"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_boardroom_meeting.jpg"]}
+            animation="pan-left"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <TitleTakeover
+            title="THE INEVITABLE RESET"
+            supportingLine="History Does Not Repeat Itself, But It Often Rhymes"
+            badge="THE HISTORICAL CYCLE"
+            accentColor="#A855F7"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 2: Historical Precedents Checklist (4.5 - 19.5s | 900 frames) */}
       <SequenceElement from={270} durationInFrames={900}>
-        <ActionChecklist
-          title="HISTORICAL PRECEDENTS"
-          subtitle="How Infrastructure Bubbles Transform Civilization"
-          badge="VERIFIED OPERATIONAL PROTOCOL"
-          accentColor="#06B6D4"
-          tasks={historyTasks}
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_silicon_valley.jpg"]}
+            animation="drift-up"
+            particles="dust"
+            particleColor="#06B6D4"
+            particleIntensity={0.3}
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <ActionChecklist
+            title="HISTORICAL PRECEDENTS"
+            subtitle="How Infrastructure Bubbles Transform Civilization"
+            badge="VERIFIED OPERATIONAL PROTOCOL"
+            accentColor="#06B6D4"
+            tasks={historyTasks}
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 3: TPU Cluster Compute B-Roll (19.5 - 27.0s | 450 frames) */}
@@ -874,26 +1157,57 @@ export const TechTheoryAct5: React.FC = () => {
 
       {/* Cut 4: Who Wins Comparison Card (27.0 - 37.0s | 600 frames) */}
       <SequenceElement from={1620} durationInFrames={600}>
-        <ComparisonCard
-          title="WHO SURVIVES THE CRASH"
-          leftLabel="The First Wave"
-          leftValue="Overleveraged Hype"
-          rightLabel="The Second Wave"
-          rightValue="Real Utility Giants"
-          backgroundColor="#070B14"
-          cardBackgroundColor="rgba(15, 23, 42, 0.9)"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_datacenter_racks.jpg"]}
+            animation="zoom-in"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <ComparisonCard
+            title="WHO SURVIVES THE CRASH"
+            leftLabel="The First Wave"
+            leftValue="Overleveraged Hype"
+            rightLabel="The Second Wave"
+            rightValue="Real Utility Giants"
+            backgroundColor="transparent"
+            cardBackgroundColor="rgba(15, 23, 42, 0.88)"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 5: The Secondary Builders Callout (37.0 - 45.0s | 480 frames) */}
       <SequenceElement from={2220} durationInFrames={480}>
-        <CalloutBox
-          type="tip"
-          title="THE REAL WEALTH"
-          text="The dot-com crash built the fiber that gave us Google, Amazon, and Netflix. The AI crash will give us cheap infinite compute."
-          borderColor="#A855F7"
-          backgroundColor="rgba(15, 23, 42, 0.9)"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/tpu_cluster_authentic.jpg"]}
+            animation="pan-right"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <CalloutBox
+            type="tip"
+            title="THE REAL WEALTH"
+            text="The dot-com crash built the fiber that gave us Google, Amazon, and Netflix. The AI crash will give us cheap infinite compute."
+            borderColor="#A855F7"
+            containerBackgroundColor="transparent"
+            backgroundColor="rgba(15, 23, 42, 0.88)"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 6: Silicon Valley B-Roll (45.0 - 51.5s | 390 frames) */}
@@ -908,12 +1222,29 @@ export const TechTheoryAct5: React.FC = () => {
 
       {/* Cut 7: Tech Theory Lab Channel Signoff (51.5 - 59.04s | 452 frames) */}
       <SequenceElement from={3090} durationInFrames={452}>
-        <HeroTitle
-          title="TECH THEORY LAB"
-          subtitle="Question the narrative. Follow the capital. Subscribe for next week's investigation."
-          tag="EPISODE 02 ARCHIVE"
-          accentColor="#06B6D4"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_silicon_valley.jpg"]}
+            animation="ken-burns"
+            particles="dust"
+            particleColor="#06B6D4"
+            particleIntensity={0.3}
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <HeroTitle
+            title="TECH THEORY LAB"
+            subtitle="Question the narrative. Follow the capital. Subscribe for next week's investigation."
+            tag="EPISODE 02 ARCHIVE"
+            accentColor="#06B6D4"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Syllable-Synced Subtitles */}

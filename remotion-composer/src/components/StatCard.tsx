@@ -10,6 +10,8 @@ interface StatCardProps {
   backgroundColor?: string;
 }
 
+const Container = AbsoluteFill as any;
+
 export const StatCard: React.FC<StatCardProps> = ({
   stat,
   subtitle,
@@ -37,7 +39,7 @@ export const StatCard: React.FC<StatCardProps> = ({
   });
 
   return (
-    <AbsoluteFill
+    <Container
       style={{
         justifyContent: "center",
         alignItems: "center",
@@ -72,6 +74,6 @@ export const StatCard: React.FC<StatCardProps> = ({
           </div>
         )}
       </div>
-    </AbsoluteFill>
+    </Container>
   );
 };
