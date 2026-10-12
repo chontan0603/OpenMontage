@@ -40,11 +40,11 @@ export const CalloutBox: React.FC<CalloutBoxProps> = ({
   title,
   borderColor,
   backgroundColor,
-  textColor = "#1F2937",
+  textColor = "#F8FAFC",
   fontFamily = "Inter, system-ui, sans-serif",
   fontSize = 32,
   titleFontSize = 38,
-  containerBackgroundColor = "#FFFFFF",
+  containerBackgroundColor = "transparent",
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -135,11 +135,13 @@ export const CalloutBox: React.FC<CalloutBoxProps> = ({
             flexDirection: "row",
             alignItems: "flex-start",
             backgroundColor: resolvedBg,
-            borderRadius: 12,
+            backdropFilter: "blur(24px)",
+            borderRadius: 20,
+            border: "1px solid rgba(255, 255, 255, 0.15)",
             padding: "40px 48px",
             overflow: "hidden",
             position: "relative",
-            boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+            boxShadow: `0 25px 60px rgba(0, 0, 0, 0.7), 0 0 30px ${resolvedBorder}33`,
           }}
         >
           {/* Left border accent */}

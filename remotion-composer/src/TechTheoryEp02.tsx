@@ -516,6 +516,7 @@ export const TechTheoryAct2: React.FC = () => {
             borderColor="#EF4444"
             containerBackgroundColor="transparent"
             backgroundColor="rgba(28, 11, 11, 0.90)"
+            textColor="#F8FAFC"
           />
         </Container>
       </SequenceElement>
@@ -588,6 +589,7 @@ export const TechTheoryAct2: React.FC = () => {
             borderColor="#0081FB"
             containerBackgroundColor="transparent"
             backgroundColor="rgba(15, 23, 42, 0.88)"
+            textColor="#F8FAFC"
           />
         </Container>
       </SequenceElement>
@@ -649,32 +651,33 @@ export const TechTheoryAct2: React.FC = () => {
         </Container>
       </SequenceElement>
 
-      {/* Cut 8: Rapid Obsolescence Warning (58.00 - 67.00s | 540 frames)
+      {/* Cut 8: Rapid Obsolescence Warning with High-Density GPU Cluster B-Roll (58.00 - 67.00s | 540 frames)
           Dialogue: "High-density GPU racks run blistering hot, consume megawatts of grid power, and become economically obsolete in just three to five years." */}
       <SequenceElement from={3480} durationInFrames={540}>
         <Container>
           <AnimeScene
-            images={["techtheory_ep02/images/broll_datacenter_racks.jpg"]}
+            images={["techtheory_ep02/images/broll_gpu_cluster.jpg"]}
             animation="zoom-in"
             particles="dust"
             particleColor="#EF4444"
-            particleIntensity={0.5}
+            particleIntensity={0.4}
             vignette={true}
           />
           <div
             style={{
               position: "absolute",
               inset: 0,
-              backgroundColor: "rgba(24, 7, 7, 0.80)",
+              backgroundColor: "rgba(24, 7, 7, 0.65)",
             }}
           />
           <CalloutBox
             type="warning"
-            title="ECONOMIC OBSOLESCENCE"
-            text="High-density GPU clusters run blistering hot, consume megawatts of grid power, and become economically obsolete in just 3 to 5 years."
+            title="HIGH-DENSITY GPU CLUSTERS"
+            text="High-density GPU racks run blistering hot, consume megawatts of grid power, and become economically obsolete in just 3 to 5 years."
             borderColor="#EF4444"
             containerBackgroundColor="transparent"
-            backgroundColor="rgba(28, 11, 11, 0.90)"
+            backgroundColor="rgba(28, 11, 11, 0.88)"
+            textColor="#F8FAFC"
           />
         </Container>
       </SequenceElement>
@@ -761,9 +764,10 @@ export const TechTheoryAct3: React.FC = () => {
       {/* Cut 2: Nvidia & Jensen Huang Spotlight (4.5 - 15.0s | 630 frames) */}
       <SequenceElement from={270} durationInFrames={630}>
         <CompanySpotlight
-          name="NVIDIA"
-          role="The Silicon Monopoly"
-          company="Jensen Huang, Founder & CEO"
+          name="JENSEN HUANG"
+          role="Founder & CEO"
+          company="NVIDIA Corporation"
+          avatarUrl="techtheory_ep02/images/jensen_huang_portrait.jpg"
           logoUrl="techtheory_ep02/logos/nvidia.svg"
           brollUrl="techtheory_ep02/images/broll_silicon_valley.jpg"
           overlayOpacity={0.72}
@@ -821,8 +825,8 @@ export const TechTheoryAct3: React.FC = () => {
       <SequenceElement from={1740} durationInFrames={480}>
         <Container>
           <AnimeScene
-            images={["techtheory_ep02/images/broll_programmer_code.jpg"]}
-            animation="zoom-in"
+            images={["techtheory_ep02/images/broll_cuda_architecture.jpg"]}
+            animation="pan-right"
             particles="none"
             vignette={true}
           />
@@ -830,26 +834,58 @@ export const TechTheoryAct3: React.FC = () => {
             style={{
               position: "absolute",
               inset: 0,
-              backgroundColor: "rgba(7, 11, 20, 0.75)",
+              backgroundColor: "rgba(7, 11, 20, 0.72)",
             }}
           />
           <TitleTakeover
             title="THE CUDA SOFTWARE MOAT"
-            supportingLine="18 Years of Developer Lock-In That Competitors Cannot Break"
+            supportingLine="18 Years of Software Lock-In (PyTorch, TensorFlow, cuDNN)"
             badge="SOFTWARE DEFENSE"
             accentColor="#76B900"
           />
         </Container>
       </SequenceElement>
 
-      {/* Cut 6: Programmer Code B-Roll (37.0 - 44.0s | 420 frames) */}
+      {/* Cut 6: CUDA Architecture Deep Dive B-Roll (37.0 - 44.0s | 420 frames) */}
       <SequenceElement from={2220} durationInFrames={420}>
-        <AnimeScene
-          images={["techtheory_ep02/images/broll_programmer_code.jpg"]}
-          animation="zoom-in"
-          particles="none"
-          vignette={true}
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_cuda_architecture.jpg"]}
+            animation="zoom-in"
+            particles="dust"
+            particleColor="#76B900"
+            particleIntensity={0.3}
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.35)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              bottom: 70,
+              left: 100,
+              zIndex: 10,
+              padding: "20px 36px",
+              backgroundColor: "rgba(7, 11, 20, 0.88)",
+              backdropFilter: "blur(20px)",
+              borderRadius: 16,
+              border: "1px solid rgba(118, 185, 0, 0.6)",
+              boxShadow: "0 15px 35px rgba(0,0,0,0.8)",
+            }}
+          >
+            <div style={{ color: "#76B900", fontSize: 16, fontWeight: 800, letterSpacing: "0.2em", textTransform: "uppercase" }}>
+              NVIDIA CUDA PARALLEL RUNTIME ARCHITECTURE
+            </div>
+            <div style={{ color: "#F8FAFC", fontSize: 24, fontWeight: 600, marginTop: 4 }}>
+              Locking PyTorch, TensorFlow & JAX Directly Into Streaming Multiprocessors
+            </div>
+          </div>
+        </Container>
       </SequenceElement>
 
       {/* Cut 7: The Circular Funding Loop Callout (44.0 - 54.0s | 600 frames) */}
@@ -875,6 +911,7 @@ export const TechTheoryAct3: React.FC = () => {
             borderColor="#F59E0B"
             containerBackgroundColor="transparent"
             backgroundColor="rgba(15, 23, 42, 0.88)"
+            textColor="#F8FAFC"
           />
         </Container>
       </SequenceElement>
