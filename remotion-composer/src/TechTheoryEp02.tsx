@@ -35,29 +35,34 @@ const SequenceElement = Sequence as any;
 // ----------------------------------------------------------------------------
 // Custom Visual: Big Tech 80% Gross Margin Engines (Microsoft, Google, Meta)
 // ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// Custom Visual: Big Tech 80% Gross Margin Engines (Microsoft, Google, Meta)
+// ----------------------------------------------------------------------------
 const BigTechTitanCards: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
   const titans = [
     { name: "Microsoft", logo: "techtheory_ep02/logos/microsoft.svg", margin: "80%", color: "#00A4EF" },
-    { name: "Alphabet", logo: "techtheory_ep02/logos/google.svg", margin: "76%", color: "#4285F4" },
+    { name: "Google", logo: "techtheory_ep02/logos/google.svg", margin: "76%", color: "#4285F4" },
     { name: "Meta", logo: "techtheory_ep02/logos/meta.svg", margin: "81%", color: "#0081FB" },
   ];
 
   return (
     <Container style={{ justifyContent: "center", alignItems: "center", background: "#070B14" }}>
-      {/* Background grid */}
+      {/* Authentic Silicon Valley Campus B-Roll Background */}
+      <AnimeScene
+        images={["techtheory_ep02/images/broll_silicon_valley.jpg"]}
+        animation="pan-left"
+        particles="none"
+        vignette={true}
+      />
       <div
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-          opacity: 0.6,
+          backgroundColor: "rgba(7, 11, 20, 0.78)",
+          backdropFilter: "blur(6px)",
         }}
       />
 
@@ -68,7 +73,7 @@ const BigTechTitanCards: React.FC = () => {
             padding: "6px 20px",
             borderRadius: 30,
             background: "rgba(56, 189, 248, 0.15)",
-            border: "1px solid rgba(56, 189, 248, 0.4)",
+            border: "1px solid rgba(56, 189, 248, 0.5)",
             color: "#38BDF8",
             fontSize: 14,
             fontWeight: 800,
@@ -82,12 +87,13 @@ const BigTechTitanCards: React.FC = () => {
         </div>
         <h2
           style={{
-            fontSize: 52,
-            fontWeight: 800,
+            fontSize: 54,
+            fontWeight: 900,
             color: "#F8FAFC",
             letterSpacing: "-0.02em",
             margin: "0 0 12px 0",
             fontFamily: "Space Grotesk, Inter, sans-serif",
+            textShadow: "0 10px 30px rgba(0,0,0,0.8)",
           }}
         >
           80% GROSS MARGIN CASH COMPACT
@@ -95,8 +101,8 @@ const BigTechTitanCards: React.FC = () => {
         <p
           style={{
             fontSize: 22,
-            color: "#94A3B8",
-            margin: "0 0 48px 0",
+            color: "rgba(248, 250, 252, 0.8)",
+            margin: "0 0 44px 0",
             fontFamily: "Inter, sans-serif",
           }}
         >
@@ -118,43 +124,44 @@ const BigTechTitanCards: React.FC = () => {
                 style={{
                   flex: 1,
                   maxWidth: 380,
-                  background: "rgba(15, 23, 42, 0.88)",
+                  background: "rgba(15, 23, 42, 0.92)",
                   borderRadius: 24,
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
+                  border: "1px solid rgba(255, 255, 255, 0.15)",
                   padding: "36px 28px",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  boxShadow: `0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 30px ${titan.color}22`,
+                  boxShadow: `0 25px 50px -10px rgba(0, 0, 0, 0.8), 0 0 35px ${titan.color}25`,
                   transform: `translateY(${interpolate(cardSpring, [0, 1], [40, 0])}px) scale(${interpolate(cardSpring, [0, 1], [0.9, 1])})`,
                   opacity: cardSpring,
                 }}
               >
                 <div
                   style={{
-                    width: 72,
-                    height: 72,
-                    borderRadius: 18,
-                    background: "rgba(255, 255, 255, 0.06)",
-                    border: "1px solid rgba(255, 255, 255, 0.12)",
+                    width: 76,
+                    height: 76,
+                    borderRadius: 20,
+                    background: "rgba(255, 255, 255, 0.08)",
+                    border: "1px solid rgba(255, 255, 255, 0.18)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     marginBottom: 20,
+                    boxShadow: `0 0 20px ${titan.color}33`,
                   }}
                 >
                   <img
                     src={resolveAsset(titan.logo)}
                     alt={titan.name}
-                    style={{ width: 44, height: 44, objectFit: "contain" }}
+                    style={{ width: 48, height: 48, objectFit: "contain" }}
                   />
                 </div>
                 <div
                   style={{
-                    fontSize: 26,
-                    fontWeight: 700,
+                    fontSize: 28,
+                    fontWeight: 800,
                     color: "#F8FAFC",
-                    marginBottom: 8,
+                    marginBottom: 6,
                     fontFamily: "Space Grotesk, sans-serif",
                   }}
                 >
@@ -162,12 +169,13 @@ const BigTechTitanCards: React.FC = () => {
                 </div>
                 <div
                   style={{
-                    fontSize: 48,
+                    fontSize: 52,
                     fontWeight: 900,
                     color: titan.color,
                     letterSpacing: "-0.02em",
                     fontFamily: "Space Grotesk, sans-serif",
-                    margin: "12px 0 6px 0",
+                    margin: "10px 0 6px 0",
+                    textShadow: `0 0 24px ${titan.color}55`,
                   }}
                 >
                   {titan.margin}
@@ -194,50 +202,99 @@ const BigTechTitanCards: React.FC = () => {
 
 // ============================================================================
 // ACT 1: Cold Open & The $600B AI Lie (0:00 - 1:01.66 | 3,699 frames @ 60 FPS)
-// Pacing: 9 cuts fully synchronized word-by-word with Christopher's narration
+// Pacing: 9 cuts fully synchronized word-by-word with authentic B-Roll on every cut
 // ============================================================================
 export const TechTheoryAct1: React.FC = () => {
   return (
     <Container style={{ backgroundColor: "#070B14" }}>
-      {/* Audio Layer - Clean Voice Only */}
+      {/* Audio Layer - Clean Voice Only (No Music / No SFX) */}
       <AudioElement src={resolveAsset("techtheory_ep02/audio/act1.mp3")} volume={1.0} />
 
       {/* Cut 1: "$600 BILLION IN AI" (0.00 - 6.80s | 408 frames)
           Dialogue: "Over the past twenty-four months, Big Tech committed more than six hundred billion dollars to artificial intelligence." */}
       <SequenceElement from={0} durationInFrames={408}>
-        <TitleTakeover
-          title="$600 BILLION IN AI"
-          supportingLine="Big Tech Capex Committed Across Just 24 Months"
-          badge="THE SILICON VALLEY INVESTMENT"
-          accentColor="#06B6D4"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/tpu_cluster_authentic.jpg"]}
+            animation="ken-burns"
+            particles="dust"
+            particleColor="#06B6D4"
+            particleIntensity={0.5}
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.70)",
+            }}
+          />
+          <TitleTakeover
+            title="$600 BILLION IN AI"
+            supportingLine="Big Tech Capex Committed Across Just 24 Months"
+            badge="THE SILICON VALLEY INVESTMENT"
+            accentColor="#06B6D4"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 2: "THE FASTEST REVOLUTION" (6.80 - 12.21s | 325 frames)
           Dialogue: "On Wall Street, this was sold as the fastest technology revolution in human history." */}
       <SequenceElement from={408} durationInFrames={325}>
-        <TitleTakeover
-          title="THE FASTEST REVOLUTION"
-          supportingLine="Sold on Wall Street as the Greatest Technology Supercycle in Human History"
-          badge="THE WALL STREET PITCH"
-          accentColor="#10B981"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_boardroom_meeting.jpg"]}
+            animation="pan-left"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.72)",
+            }}
+          />
+          <TitleTakeover
+            title="THE FASTEST REVOLUTION"
+            supportingLine="Sold on Wall Street as the Greatest Technology Supercycle in Human History"
+            badge="THE WALL STREET PITCH"
+            accentColor="#10B981"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 3: Three Conference Call Promises (12.21 - 20.83s | 517 frames)
           Dialogue: "Every conference call featured the same promises: automated workflows, supercharged productivity, and trillion-dollar software markets." */}
       <SequenceElement from={733} durationInFrames={517}>
-        <ActionChecklist
-          title="THE EARNINGS CALL PROMISES"
-          subtitle="What Tech Executives Pitched to Wall Street Analysts"
-          badge="THE CORPORATE ROADMAP"
-          accentColor="#06B6D4"
-          tasks={[
-            { label: "Automated Workflows", at: 3.1, detail: "Autonomous execution across entire enterprise pipelines", badge: "PROMISED" },
-            { label: "Supercharged Productivity", at: 4.4, detail: "10x output acceleration for knowledge workers", badge: "PROMISED" },
-            { label: "Trillion-Dollar Software TAM", at: 6.2, detail: "Massive corporate spending rotation into generative AI", badge: "PROMISED" },
-          ]}
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_boardroom_meeting.jpg"]}
+            animation="zoom-in"
+            particles="dust"
+            particleColor="#06B6D4"
+            particleIntensity={0.3}
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.75)",
+            }}
+          />
+          <ActionChecklist
+            title="THE EARNINGS CALL PROMISES"
+            subtitle="What Tech Executives Pitched to Wall Street Analysts"
+            badge="THE CORPORATE ROADMAP"
+            accentColor="#06B6D4"
+            tasks={[
+              { label: "Automated Workflows", at: 3.1, detail: "Autonomous execution across entire enterprise pipelines", badge: "PROMISED" },
+              { label: "Supercharged Productivity", at: 4.4, detail: "10x output acceleration for knowledge workers", badge: "PROMISED" },
+              { label: "Trillion-Dollar Software TAM", at: 6.2, detail: "Massive corporate spending rotation into generative AI", badge: "PROMISED" },
+            ]}
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 4: Silicon Valley Campus B-Roll (20.83 - 24.63s | 228 frames)
@@ -263,31 +320,63 @@ export const TechTheoryAct1: React.FC = () => {
       {/* Cut 5: The Math Falls Apart (24.63 - 29.43s | 288 frames)
           Dialogue: "But if you actually open the quarterly balance sheets, the math falls apart." */}
       <SequenceElement from={1478} durationInFrames={288}>
-        <CalloutBox
-          type="warning"
-          title="THE BALANCE SHEET DISCONNECT"
-          text="Quarterly 10-Q Filings: Datacenter Capex is accelerating exponentially, while generative AI software revenue fails to materialize."
-          borderColor="#EF4444"
-          containerBackgroundColor="#070B14"
-          backgroundColor="rgba(28, 11, 11, 0.95)"
-          textColor="#F8FAFC"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_datacenter_racks.jpg"]}
+            animation="pan-right"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(24, 7, 7, 0.82)",
+            }}
+          />
+          <CalloutBox
+            type="warning"
+            title="THE BALANCE SHEET DISCONNECT"
+            text="Quarterly 10-Q Filings: Datacenter Capex is accelerating exponentially, while generative AI software revenue fails to materialize."
+            borderColor="#EF4444"
+            containerBackgroundColor="transparent"
+            backgroundColor="rgba(28, 11, 11, 0.95)"
+            textColor="#F8FAFC"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 6: The Golden Rule of Software (29.43 - 40.58s | 669 frames)
           Dialogue: "For twenty years, the software industry operated on a simple, golden rule: write the code once, host it on the cloud, and sell it to millions of users with near-zero marginal cost." */}
       <SequenceElement from={1766} durationInFrames={669}>
-        <ActionChecklist
-          title="THE GOLDEN RULE OF SOFTWARE"
-          subtitle="The 20-Year Economic Engine of Cloud Computing"
-          badge="TRADITIONAL SAAS ECONOMICS"
-          accentColor="#38BDF8"
-          tasks={[
-            { label: "1. Write Code Once", at: 4.7, detail: "Fixed upfront engineering cost", badge: "FIXED R&D" },
-            { label: "2. Host on Shared Cloud", at: 6.8, detail: "Multi-tenant servers serving millions concurrently", badge: "SCALE" },
-            { label: "3. Near-Zero Marginal Cost", at: 9.5, detail: "Serving user 1,000,001 costs virtually $0.00", badge: "80%+ MARGIN" },
-          ]}
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_programmer_code.jpg"]}
+            animation="drift-up"
+            particles="dust"
+            particleColor="#38BDF8"
+            particleIntensity={0.3}
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(7, 11, 20, 0.76)",
+            }}
+          />
+          <ActionChecklist
+            title="THE GOLDEN RULE OF SOFTWARE"
+            subtitle="The 20-Year Economic Engine of Cloud Computing"
+            badge="TRADITIONAL SAAS ECONOMICS"
+            accentColor="#38BDF8"
+            tasks={[
+              { label: "1. Write Code Once", at: 4.7, detail: "Fixed upfront engineering cost", badge: "FIXED R&D" },
+              { label: "2. Host on Shared Cloud", at: 6.8, detail: "Multi-tenant servers serving millions concurrently", badge: "SCALE" },
+              { label: "3. Near-Zero Marginal Cost", at: 9.5, detail: "Serving user 1,000,001 costs virtually $0.00", badge: "80%+ MARGIN" },
+            ]}
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 7: Big Tech 80% Gross Margin Engines (40.58 - 49.66s | 545 frames)
@@ -299,23 +388,47 @@ export const TechTheoryAct1: React.FC = () => {
       {/* Cut 8: The Assumption (49.66 - 54.64s | 298 frames)
           Dialogue: "Investors assumed artificial intelligence would follow the exact same playbook." */}
       <SequenceElement from={2980} durationInFrames={298}>
-        <HeroTitle
-          tag="THE INVESTOR ASSUMPTION"
-          title="THE SAME PLAYBOOK"
-          subtitle="Wall Street assumed GenAI would produce traditional 80% SaaS software margins."
-          accentColor="#38BDF8"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/tpu_cluster_authentic.jpg"]}
+            animation="zoom-in"
+            particles="none"
+            vignette={true}
+          />
+          <HeroTitle
+            tag="THE INVESTOR ASSUMPTION"
+            title="THE SAME PLAYBOOK"
+            subtitle="Wall Street assumed GenAI would produce traditional 80% SaaS software margins."
+            accentColor="#38BDF8"
+            scrimBackground="rgba(7, 11, 20, 0.75)"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Cut 9: Reality & Broken Software Physics (54.64 - 61.66s | 421 frames)
           Dialogue: "But that is not what happened. Generative AI broke the fundamental physics of software economics." */}
       <SequenceElement from={3278} durationInFrames={421}>
-        <TitleTakeover
-          title="BROKEN SOFTWARE PHYSICS"
-          supportingLine="Generative AI is not zero-marginal-cost software. Every token burns specialized silicon."
-          badge="BUT THAT IS NOT WHAT HAPPENED"
-          accentColor="#EF4444"
-        />
+        <Container>
+          <AnimeScene
+            images={["techtheory_ep02/images/broll_datacenter_racks.jpg"]}
+            animation="zoom-in"
+            particles="none"
+            vignette={true}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundColor: "rgba(24, 7, 7, 0.80)",
+            }}
+          />
+          <TitleTakeover
+            title="BROKEN SOFTWARE PHYSICS"
+            supportingLine="Generative AI is not zero-marginal-cost software. Every token burns specialized silicon."
+            badge="BUT THAT IS NOT WHAT HAPPENED"
+            accentColor="#EF4444"
+          />
+        </Container>
       </SequenceElement>
 
       {/* Syllable-Synced Subtitles */}
