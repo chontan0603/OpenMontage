@@ -1109,6 +1109,7 @@ export const TechTheoryAct4: React.FC = () => {
             borderColor="#EF4444"
             containerBackgroundColor="transparent"
             backgroundColor="rgba(15, 23, 42, 0.88)"
+            textColor="#F8FAFC"
           />
         </Container>
       </SequenceElement>
@@ -1300,6 +1301,7 @@ export const TechTheoryAct5: React.FC = () => {
             borderColor="#A855F7"
             containerBackgroundColor="transparent"
             backgroundColor="rgba(15, 23, 42, 0.88)"
+            textColor="#F8FAFC"
           />
         </Container>
       </SequenceElement>
