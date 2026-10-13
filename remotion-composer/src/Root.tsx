@@ -24,6 +24,13 @@ import {
   TechTheoryAct4,
   TechTheoryAct5,
 } from "./TechTheoryEp02";
+import {
+  TechTheoryEp03Act1,
+  TechTheoryEp03Act2,
+  TechTheoryEp03Act3,
+  TechTheoryEp03Act4,
+  TechTheoryEp03Act5,
+} from "./TechTheoryEp03";
 
 
 // ---------------------------------------------------------------------------
@@ -383,6 +390,46 @@ export const Root: React.FC = () => {
         id="TechTheoryEp02-Act5"
         component={TechTheoryAct5}
         durationInFrames={3542}
+        fps={60}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TechTheoryEp03-Act1"
+        component={TechTheoryEp03Act1}
+        durationInFrames={5301}
+        fps={60}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TechTheoryEp03-Act2"
+        component={TechTheoryEp03Act2}
+        durationInFrames={5432}
+        fps={60}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TechTheoryEp03-Act3"
+        component={TechTheoryEp03Act3}
+        durationInFrames={5386}
+        fps={60}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TechTheoryEp03-Act4"
+        component={TechTheoryEp03Act4}
+        durationInFrames={5594}
+        fps={60}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TechTheoryEp03-Act5"
+        component={TechTheoryEp03Act5}
+        durationInFrames={5176}
         fps={60}
         width={1920}
         height={1080}
